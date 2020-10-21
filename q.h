@@ -8,9 +8,9 @@ TCB_t *NewItem()              //Returns a new TCB object newItem
    return q;        //Create newq and return the q  
 }
 
-void InitQueue(struct TCB_t **head)                    //Point empty queue(NULL) to head 
+void InitQueue(struct TCB_t *head)                    //Point empty queue(NULL) to head 
 {
-   *head = NULL;                             
+   head = NULL;                             
 }
 
 void AddQueue(struct TCB_t **head, struct TCB_t *item) //adds a queue item, pointed to by "item", to the queue pointed by head 
