@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <sem.h> 
+#include "sem.h"
 
 int B_num;      //Buffer size 
 int P_num;      //# of producers
