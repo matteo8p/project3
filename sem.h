@@ -13,27 +13,22 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 
 void P(struct sem *semaphore)
 {
-    if(semaphore->val > 0)                              //If semaphore value is greater than 0, decrement 
-    {
-        semaphore->val = semaphore->val - 1;            
-    }
-
-    if(semaphore->val <= 0)                             //Block if val is <= 0. Let go when val > 0
-    {        
-		struct TCB_t *currThread = DelQueue(&runQ);
-		AddQueue(&(semaphore->q), currThread);
+	semaphore->value--;
+	if (semaphore->value < 0) {
+		//rotateQueue(&runQ);
+		struct TCB_t *currThread = delQueue(&runQ);
+		addQueue(&(semaphore->queue), currThread);
 		while (runQ == NULL) ;
 		swapcontext(&(currThread->context), &(runQ->context));
-    }
+	}
 }
 
 void V(struct sem *semaphore)
 {
-    semaphore->val = semaphore->val + 1;                //Increment semaphore val
-
-    if(semaphore->val <= 0)                             
-    {
-        AddQueue(&runQ, DelQueue(&(semaphore->q)));                      //Place it into runQ 
-    }
-    yield(); 
+	semaphore->value++;
+	if (semaphore->value <= 0 && semaphore->queue != NULL) {
+		//rotateQueue(&runQ);
+		addQueue(&runQ, delQueue(&(semaphore->queue)));
+	}
+	yield();
 }
