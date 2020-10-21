@@ -9,7 +9,7 @@ int N_num;      //# times they run their loops
 struct sem *fullSem;
 struct sem *emptySem; 
 
-void newProducer(int id)
+void producer(int id)
 {
     int i = 0; 
     while(i < N_num)            //Loop N times 
@@ -21,7 +21,7 @@ void newProducer(int id)
     }
 }
 
-void newConsumer(int id)
+void consumer(int id)
 {
     int i = 0; 
     while(i < N_num)            //Loop N times 
@@ -52,11 +52,11 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            start_thread(&newProducer, threads[i], id);
+            start_thread(producer, threads[i], id);
         }else if(id < 0)        //ID < 0, create consumer 
         {
             id = -id;           
-            start_thread(&newConsumer, threads[i], id); 
+            start_thread(consumer, threads[i], id); 
         }
     }
 }
