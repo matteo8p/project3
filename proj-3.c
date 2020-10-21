@@ -53,7 +53,7 @@ int main()
     for(int i = 0; i < P_num + C_num; i++)
     {
         int id; 
-        scanf("%d", id);
+        scanf("%d", &id);
 
         if(id > 0)              //ID > 0, create producer 
         {
@@ -65,7 +65,6 @@ int main()
         }
     }
     run(); 
-
 }
 
 

@@ -20,10 +20,11 @@ void P(struct sem *semaphore)
 
     if(semaphore->val <= 0)                             //Block if val is <= 0. Let go when val > 0
     {        
-        AddQueue(&(semaphore->q), DelQueue(&runQ));                //Insert the deleted queue to the end of the semaphore Q 
-        yield(); 
+		struct TCB_t *currThread = delQueue(&runQ);
+		addQueue(&(sem->queue), currThread);
+		while (runQ == NULL) ;
+		swapcontext(&(currThread->context), &(runQ->context));
     }
-    return; 
 }
 
 void V(struct sem *semaphore)
@@ -35,5 +36,4 @@ void V(struct sem *semaphore)
         AddQueue(&runQ, DelQueue(&(semaphore->q)));                      //Place it into runQ 
     }
     yield(); 
-    return; 
 }
