@@ -6,12 +6,12 @@ struct sem
    struct TCB_t *q;         //queue of TCBs 
 };
 
-void InitSem(sem *semaphore, int thisValue)      //Initialize value field with specified value 
+void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field with specified value 
 {
     semaphore->val = thisValue; 
 }
 
-void P(sem *semaphore)
+void P(struct sem *semaphore)
 {
 	semaphore->val--;
 	if (semaphore->val < 0) {
@@ -22,7 +22,7 @@ void P(sem *semaphore)
 	}
 }
 
-void V(sem *semaphore)
+void V(struct sem *semaphore)
 {
 	semaphore->val++;
 	if (semaphore->val <= 0) {
