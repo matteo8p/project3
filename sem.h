@@ -13,11 +13,11 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 
 void P(struct sem *semaphore)
 {
-	semaphore->value--;
-	if (semaphore->value < 0) {
+	semaphore->val--;
+	if (semaphore->val < 0) {
 		//rotateQueue(&runQ);
-		struct TCB_t *currThread = delQueue(&runQ);
-		addQueue(&(semaphore->queue), currThread);
+		struct TCB_t *currThread = DelQueue(&runQ);
+		AddQueue(&(semaphore->q), currThread);
 		while (runQ == NULL) ;
 		swapcontext(&(currThread->context), &(runQ->context));
 	}
@@ -25,10 +25,10 @@ void P(struct sem *semaphore)
 
 void V(struct sem *semaphore)
 {
-	semaphore->value++;
-	if (semaphore->value <= 0 && semaphore->queue != NULL) {
+	semaphore->val++;
+	if (semaphore->val <= 0 && semaphore->q != NULL) {
 		//rotateQueue(&runQ);
-		addQueue(&runQ, delQueue(&(semaphore->queue)));
+		AddQueue(&runQ, DelQueue(&(semaphore->q)));
 	}
 	yield();
 }
