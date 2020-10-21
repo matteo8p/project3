@@ -15,7 +15,6 @@ void consumer();
 
 void producer()
 {
-    printf("PRODUCER");
     int i = 0; 
     while(i < N_num)            //Loop N times 
     {
@@ -65,7 +64,6 @@ int main()
     }
     printf("\nInitiate RUN \n");
     run(); 
-
     return 0; 
 }
 
