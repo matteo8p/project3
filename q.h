@@ -32,9 +32,9 @@ void AddQueue(struct TCB_t **head, struct TCB_t *item) //adds a queue item, poin
    }
 }
 
-struct TCB_t *DelQueue(struct TCB_t *head)      
+struct TCB_t *DelQueue(struct TCB_t **head)      
 {
-   TCB_t *delq = head; 
+   TCB_t *delq = *head; 
    if(head == NULL || head->next == head)
    {
       head = NULL; 
