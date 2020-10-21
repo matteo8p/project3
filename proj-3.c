@@ -50,6 +50,7 @@ int main()
 
     printf("Insert 4 numbers: \n");
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
+    printf("\n Buffer Size: %d # Producers: %d # Consumers: %d N: %d \n", B_num, P_num, C_num, N_num);   
     for(int i = 0; i < P_num + C_num; i++)
     {
         int id; 
