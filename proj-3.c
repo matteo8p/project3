@@ -46,7 +46,8 @@ int main()
     fullSem = (struct sem*) malloc(sizeof(struct sem)); 
     emptySem = (struct sem*) malloc(sizeof(struct sem)); 
 
-    InitQueue(&runQ); 
+    runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
+    InitQueue(runQ); 
 
     InitSem(emptySem, 0); 
     InitSem(fullSem, B_num);
