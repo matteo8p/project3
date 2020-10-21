@@ -14,7 +14,7 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 void P(struct sem *semaphore)
 {
 	semaphore->val--;
-	if (semaphore->val < 0) {
+	if (semaphore->val <= 0) {
 		//rotateQueue(&runQ);
 		struct TCB_t *currThread = DelQueue(&runQ);
 		AddQueue(&(semaphore->q), currThread);
@@ -27,7 +27,6 @@ void V(struct sem *semaphore)
 {
 	semaphore->val++;
 	if (semaphore->val <= 0 && semaphore->q != NULL) {
-		//rotateQueue(&runQ);
 		AddQueue(&runQ, DelQueue(&(semaphore->q)));
 	}
 	yield();
