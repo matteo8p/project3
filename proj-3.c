@@ -6,13 +6,14 @@ int P_num;      //# of producers
 int C_num;      //# of consumers 
 int N_num;      //# times they run their loops
 
+struct TCB_t *runQ; 
 struct sem *fullSem;
 struct sem *emptySem; 
 
 void producer(); 
 void consumer(); 
 
-void producer(int id)
+void producer()
 {
     int i = 0; 
     while(i < N_num)            //Loop N times 
@@ -24,7 +25,7 @@ void producer(int id)
     }
 }
 
-void consumer(int id)
+void consumer()
 {
     int i = 0; 
     while(i < N_num)            //Loop N times 
