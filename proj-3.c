@@ -65,6 +65,7 @@ int main()
             start_thread(consumer, threads[k], id); 
         }
     }
+    printf("\nInitiate RUN \n");
     run(); 
 }
 
