@@ -20,8 +20,8 @@ void P(struct sem *semaphore)
 
     if(semaphore->val <= 0)                             //Block if val is <= 0. Let go when val > 0
     {        
-		struct TCB_t *currThread = delQueue(&runQ);
-		addQueue(&(sem->queue), currThread);
+		struct TCB_t *currThread = DelQueue(&runQ);
+		addQueue(&(semaphore->queue), currThread);
 		while (runQ == NULL) ;
 		swapcontext(&(currThread->context), &(runQ->context));
     }
