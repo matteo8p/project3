@@ -54,15 +54,14 @@ int main()
     {
         int id; 
         scanf("%d", &id);
-        printf("Starting thread for ID: %d", id); 
 
         if(id > 0)              //ID > 0, create producer 
         {
-            start_thread(*producer, threads[i], id);
+            start_thread(producer, threads[i], id);
         }else if(id < 0)        //ID < 0, create consumer 
         {
             id = -id;           //Make ID positive        
-            start_thread(*consumer, threads[i], id); 
+            start_thread(consumer, threads[i], id); 
         }
     }
     run(); 
