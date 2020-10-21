@@ -57,7 +57,7 @@ int main()
         {
             printf("Added Producer\n"); 
             start_thread(producer, threads[k], id);
-        }else if(id < 0)        //ID < 0, create consumer 
+        }else       //ID < 0, create consumer 
         {  
             printf("Added Consumer\n"); 
             start_thread(consumer, threads[k], id); 
