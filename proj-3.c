@@ -55,10 +55,11 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
+            printf("Added Producer"); 
             start_thread(producer, threads[k], id);
         }else if(id < 0)        //ID < 0, create consumer 
-        {
-            id = -id;           //Make ID positive        
+        {  
+            printf("Added Consumer"); 
             start_thread(consumer, threads[k], id); 
         }
     }
