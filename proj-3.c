@@ -48,12 +48,13 @@ int main()
     InitSem(fullSem, B_num);
     InitQueue(&runQ); 
 
-
+    printf("Insert 4 numbers: \n");
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
     for(int i = 0; i < P_num + C_num; i++)
     {
         int id; 
         scanf("%d", &id);
+        printf("Starting thread for ID: %d", id); 
 
         if(id > 0)              //ID > 0, create producer 
         {
@@ -63,8 +64,9 @@ int main()
             id = -id;           //Make ID positive        
             start_thread(*consumer, threads[i], id); 
         }
-        run(); 
     }
+    run(); 
+
 }
 
 
