@@ -52,11 +52,11 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            start_thread(newProducer, threads[i], id);
+            start_thread(&newProducer, threads[i], id);
         }else if(id < 0)        //ID < 0, create consumer 
         {
             id = -id;           
-            start_thread(newConsumer, threads[i], id); 
+            start_thread(&newConsumer, threads[i], id); 
         }
     }
 }
