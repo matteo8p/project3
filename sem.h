@@ -19,9 +19,8 @@ void P(struct sem *semaphore)
     }
 
     if(semaphore->val <= 0)                             //Block if val is <= 0. Let go when val > 0
-    {
-        struct TCB_t *delQ = DelQueue(&runQ);           
-        AddQueue(&(semaphore->q), delQ);                //Insert the deleted queue to the end of the semaphore Q 
+    {        
+        AddQueue(&(semaphore->q), DelQueue(&runQ));                //Insert the deleted queue to the end of the semaphore Q 
         yield(); 
     }
     return; 
@@ -33,8 +32,7 @@ void V(struct sem *semaphore)
 
     if(semaphore->val <= 0)                             
     {
-        struct TCB_t *deletedQueue = DelQueue(&(semaphore->q)); //Takes PCB out of semaphore queue 
-        AddQueue(&runQ, deletedQueue);                          //Place it into runQ 
+        AddQueue(&runQ, DelQueue(&(semaphore->q)));                      //Place it into runQ 
     }
     yield(); 
     return; 
