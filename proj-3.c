@@ -39,7 +39,7 @@ int main()
         {
             TCB_t newthread; 
             start_thread(&producer, &newthread, id);
-        }else       //ID < 0, create consumer 
+        }else                   //ID < 0, create consumer 
         {  
             TCB_t newthread;
             id = -id;                                       
@@ -64,6 +64,7 @@ void producer(int id)
 
             TCB_t *newItemProduced = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
             newItemProduced->producerID = id; 
+            printf("passesd");
             AddQueue(&BufferQueue, newItemProduced); 
 
             objectsInBuffer++; 
