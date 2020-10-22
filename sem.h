@@ -19,8 +19,7 @@ void P(struct sem *semaphore)
 		//rotateQueue(&runQ);
 		struct TCB_t *currThread = DelQueue(&runQ);
 		AddQueue(&(semaphore->q), currThread);
-		while (runQ == NULL) ;
-		swapcontext(&(currThread->context), &(runQ->context));
+		yield(); 
 	}
 }
 

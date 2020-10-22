@@ -45,6 +45,7 @@ int main()
             start_thread(consumer, threads[k], id); 
         }
     }
+    print("Running threads"); 
     run(); 
     return 0; 
 }
