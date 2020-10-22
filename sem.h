@@ -15,7 +15,7 @@ void P(struct sem *semaphore)
 {
     semaphore->val--;
 	if (semaphore->val <= 0) {
-		addQueue(&(semaphore->q), DelQueue(&runQ));
+		addQueue(&(semaphore->q), DelQueue(runQ));
 		yield(); 
 	}
 }
@@ -27,5 +27,5 @@ void V(struct sem *semaphore)
 	{
 		AddQueue(&runQ, DelQueue(semaphore->q));
 	}
-	//yield(); 
+	yield(); 
 }
