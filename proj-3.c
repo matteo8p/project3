@@ -43,11 +43,10 @@ int main()
     struct TCB_t *threads[P_num + C_num]; 
     S = (struct sem*) malloc(sizeof(struct sem)); 
 
-    InitSem(S, B_num);
-
     printf("Insert 4 numbers: \n");
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
     //printf("\n Buffer Size: %d # Producers: %d # Consumers: %d N: %d \n", B_num, P_num, C_num, N_num);   
+    InitSem(S, B_num);
     for(int k = 0; k < P_num + C_num; k++)
     {
         int id; 
