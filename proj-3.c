@@ -52,7 +52,15 @@ void producer(int id)
     {
         P(S);
         int itemNumber = i + 1;
-        printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
+
+        if(S->val >= 0)
+        {
+            printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
+        }else
+        {
+            printf("\n Producer %d is waiting"); 
+        }
+        
         V(S); 
         //yield(); 
         i++; 
