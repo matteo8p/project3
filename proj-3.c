@@ -60,6 +60,7 @@ void producer(int id)
         }else
         {
             printf("\n Producer %d is waiting", id); 
+            i--; 
         }
         
         V(S); 
