@@ -30,7 +30,6 @@ int main()
 
     struct TCB_t *threads[P_num + C_num];
 
-    //printf("\n Buffer Size: %d # Producers: %d # Consumers: %d N: %d \n", B_num, P_num, C_num, N_num);   
     for(int k = 0; k < P_num + C_num; k++)
     {
         int id; 
@@ -38,13 +37,12 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            //printf("created producer thread"); 
-            start_thread(producer, threads[k], id);
+            TCB_t *newThread = NewItem(); 
+            start_thread(producer, newThread, id);
         }else                   //ID < 0, create consumer 
         {   
-            id = -id;               
-            //printf("Created consumer thread");                  
-            start_thread(consumer, threads[k], id); 
+            TCB_t *newThread = NewItem();                         
+            start_thread(consumer, newThread, id); 
         }
     }
     printf("Running threads"); 
