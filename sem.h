@@ -17,7 +17,7 @@ void P(struct sem *semaphore)
 	if(semaphore->val <= 0) 
 	{
 		struct TCB_t *currThread = DelQueue(runQ);
-		AddQueue(semaphore->q, currThread);
+		AddQueue(&(semaphore->q), currThread);
 		while (runQ == NULL) ;
 		swapcontext(&(currThread->context), &(runQ->context));
 	}
