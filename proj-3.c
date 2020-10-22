@@ -14,9 +14,6 @@ struct sem *empty;
 int buffer[10000];
 int in = 0; int out = 0; 
 
-void producer(); 
-void consumer(); 
-
 int main()
 {   
     full = (struct sem *)malloc(sizeof(struct sem)); 
