@@ -52,7 +52,7 @@ void producer(int id)
     {
         P(S);
         int itemNumber = i + 1;
-        
+        printf("%d", objectsInBuffer); 
         if(objectsInBuffer < B_num - 1)
         {
             printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
