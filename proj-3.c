@@ -46,7 +46,7 @@ int main()
     runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
     InitQueue(&runQ); 
 
-    InitSem(S, 0);
+    InitSem(S, B_num);
 
 
     printf("Insert 4 numbers: \n");
