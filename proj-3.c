@@ -21,6 +21,9 @@ int main()
     BufferQueue = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
     InitQueue(BufferQueue); 
 
+    runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
+    InitQueue(runQ); 
+
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
     S = (struct sem*) malloc(sizeof(struct sem)); 
     InitSem(S, B_num);
