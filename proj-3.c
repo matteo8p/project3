@@ -7,9 +7,9 @@ int P_num;      //# of producers
 int C_num;      //# of consumers 
 int N_num;      //# times they run their loops
 
-struct TCB_t *runQ; 
-struct sem *full; 
-struct sem *empty; 
+struct TCB_t *runQ = NULL; 
+struct sem *full = NULL; 
+struct sem *empty = NULL; 
 
 int buffer[10000];
 int in = 0; int out = 0; 
@@ -26,8 +26,9 @@ int main()
     InitSem(empty, B_num); 
 
     InitQueue(runQ); 
-
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
+
+    struct TCB_t *threads[P_num + C_num];
 
     //printf("\n Buffer Size: %d # Producers: %d # Consumers: %d N: %d \n", B_num, P_num, C_num, N_num);   
     for(int k = 0; k < P_num + C_num; k++)
@@ -38,12 +39,12 @@ int main()
         if(id > 0)              //ID > 0, create producer 
         {
             //printf("created producer thread"); 
-            start_thread(producer, id);
+            start_thread(producer, threads[k], id);
         }else                   //ID < 0, create consumer 
         {   
             id = -id;               
             //printf("Created consumer thread");                  
-            start_thread(consumer, id); 
+            start_thread(consumer, threads[k], id); 
         }
     }
     printf("Running threads"); 
