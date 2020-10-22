@@ -10,6 +10,7 @@ int N_num;      //# times they run their loops
 int objectsInBuffer; 
 
 struct TCB_t *BufferQueue; 
+struct TCB_t *runQ; 
 struct sem *S;
 
 void producer(); 
