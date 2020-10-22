@@ -55,7 +55,7 @@ void producer(int id)
     int i = 0; 
     while(i < N_num)            //Loop N times 
     {
-        P(readyQ);
+        P(emptyQ);
         int itemNumber = i + 1;
         //printf("%d", objectsInBuffer); 
         if(objectsInBuffer < B_num)
@@ -66,7 +66,7 @@ void producer(int id)
         {
             printf("\n Producer %d is waiting \n", id); 
         }
-        V(emptyQ); 
+        V(readyQ); 
         i++; 
     }
 }
@@ -76,7 +76,7 @@ void consumer(int id)
     int i = 0; 
     while(i < N_num)            //Loop N times 
     {
-        P(emptyQ); 
+        P(readyQ); 
         //printf("%d", objectsInBuffer); 
         if(objectsInBuffer > 0)
         {
@@ -86,7 +86,7 @@ void consumer(int id)
         {
             printf("\n Consumer %d is waiting\n", id); 
         }
-        V(readyQ); 
+        V(emptyQ); 
         //yield(); 
         i++; 
     }
