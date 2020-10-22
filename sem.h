@@ -16,8 +16,8 @@ void P(struct sem *semaphore)
 	if (semaphore->val <= 0) {
 		//rotateQueue(&runQ);
 		struct TCB_t *p = DelQueue(&runQ);
-		AddQueue(&(semaphore->q), currThread);
-        yield
+		AddQueue(&(semaphore->q), p);
+        yield(); 
 	}else
     {
         semaphore->val--;
