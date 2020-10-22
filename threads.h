@@ -20,7 +20,7 @@ void run()                                                      //Given code
 void yield() // similar to run
 {
     TCB_t *prerotate = runQ; 
-    RotateQ(&runQ);                                 //rotate the runq
+    RotateQ(runQ);                                 //rotate the runq
     swapcontext(&(prerotate->context), &(runQ->context));  //swap context of old runq and current runq 
 }
 
