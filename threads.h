@@ -2,7 +2,7 @@
 
 extern struct TCB_t *runQ; //Global header pointer
 
-void start_thread(void (*function)(int), TCB_t *thread, int id)
+void start_thread(void (*function)(void), TCB_t *thread, int id)
 { 
     void *stack = (void *)malloc(8192);                                 //Allocate stack of size 8192 
     thread = (struct TCB_t *)malloc(sizeof(TCB_t));                 //Allocate a tcb via malloc 

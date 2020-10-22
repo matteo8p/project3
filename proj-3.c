@@ -40,7 +40,6 @@ void consumer(int id)
 
 int main()
 {
-    struct TCB_t *threads[P_num + C_num]; 
     S = (struct sem*) malloc(sizeof(struct sem)); 
 
     runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
@@ -57,12 +56,12 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            //printf("Added Producer\n"); 
-            start_thread(producer, threads[k], id);
+            TCB_t newthread; 
+            start_thread(producer, &newthread, id);
         }else       //ID < 0, create consumer 
         {  
-            //printf("Added Consumer\n"); 
-            start_thread(consumer, threads[k], id); 
+            TCB_t newthread;
+            start_thread(consumer, &newthread, id); 
         }
     }
     
