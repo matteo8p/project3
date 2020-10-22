@@ -25,7 +25,7 @@ int main()
     InitSem(full, 0); 
     InitSem(empty, B_num); 
 
-    InitQueue(runQ); 
+    InitQueue(&runQ); 
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
 
     struct TCB_t *threads[P_num + C_num];
