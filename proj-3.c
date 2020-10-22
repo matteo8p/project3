@@ -64,7 +64,7 @@ void producer(int id)
 
             TCB_t *newItemProduced = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
             newItemProduced->producerID = id; 
-            AddQueue(&BufferQueue, newItemProduced); 
+            AddQueue(&BufferQueue, &newItemProduced); 
 
             objectsInBuffer++; 
         }else
