@@ -58,7 +58,7 @@ void producer(int id)
             printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
         }else
         {
-            printf("\n Producer %d is waiting"); 
+            printf("\n Producer %d is waiting", id); 
         }
         
         V(S); 
