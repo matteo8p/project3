@@ -59,7 +59,7 @@ void producer(int id)
         int itemNumber = i + 1;
         printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
         in = (in + 1) % B_num; 
-        yeild(); 
+        yield(); 
         //V(full); 
         i++; 
     }
