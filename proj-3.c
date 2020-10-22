@@ -61,7 +61,7 @@ void producer(int id)
         if(objectsInBuffer < B_num)
         {
             printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
-            TCB_t *newItemProduced = NewItem(); 
+            TCB_t *newItemProduced = NewItem(id); 
             printf("passesd");
             AddQueue(&BufferQueue, newItemProduced); 
 
