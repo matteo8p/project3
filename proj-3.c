@@ -10,9 +10,8 @@ int N_num;      //# times they run their loops
 int objectsInBuffer; 
 
 struct TCB_t *runQ; 
-struct TCB_t *readyQ; 
-struct TCB_t *emptyQ; 
-struct sem *S;
+struct sem *readyQ; 
+struct sem *emptyQ; 
 
 void producer(); 
 void consumer(); 
