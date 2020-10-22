@@ -1,13 +1,13 @@
 #include "q.h" 
 
-extern struct TCB_t *runQ; //Global header pointer
+struct TCB_t *runQ; //Global header pointer
 
-void start_thread(void (*function)(void), TCB_t *thread, int id)
+void start_thread(void (*function)(void), int id)
 { 
     void *stack = (void *)malloc(8192);                                 //Allocate stack of size 8192 
-    thread = (struct TCB_t *)malloc(sizeof(TCB_t));                 //Allocate a tcb via malloc 
+    TCB_t *thread = NewItem();                //Allocate a tcb via malloc 
     init_TCB(thread, function, stack, 8192, id);                       //Call init_tcb with arguments 
-    AddQueue(&runQ, thread);                                       //Add this tcb to global runQ
+    AddQueue(runQ, thread);                                       //Add this tcb to global runQ
 }
 
 void run()                                                      //Given code 

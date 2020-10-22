@@ -39,14 +39,12 @@ int main()
         if(id > 0)              //ID > 0, create producer 
         {
             //printf("created producer thread"); 
-            threads[k] = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
-            start_thread(&producer, threads[k], id);
+            start_thread(&producer, id);
         }else                   //ID < 0, create consumer 
         {   
             id = -id;               
-            //printf("Created consumer thread");       
-            threads[k] = (struct TCB_t*)malloc(sizeof(struct TCB_t));               
-            start_thread(&consumer, threads[k], id); 
+            //printf("Created consumer thread");                  
+            start_thread(&consumer, id); 
         }
     }
     printf("Running threads"); 
