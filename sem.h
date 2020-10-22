@@ -14,11 +14,11 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 void P(struct sem *semaphore)
 {
     semaphore->val--;
-	if (semaphore->val <= 0) {
-		AddQueue(&(semaphore->q), DelQueue(runQ));
-
+	if (semaphore->val < 0) {
+		struct TCB_t *t = DelQueue(runQ); 
+		AddQueue(&(semaphore->q), t);
+		swapcontext(&(t->context), &(runQ->context)); 
 	}
-	yield(); 
 }
 
 void V(struct sem *semaphore)
