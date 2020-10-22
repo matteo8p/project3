@@ -43,11 +43,7 @@ int main()
     struct TCB_t *threads[P_num + C_num]; 
     S = (struct sem*) malloc(sizeof(struct sem)); 
 
-    runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
-    InitQueue(&runQ); 
-
     InitSem(S, B_num);
-
 
     printf("Insert 4 numbers: \n");
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
@@ -67,6 +63,7 @@ int main()
             start_thread(consumer, threads[k], id); 
         }
     }
+
     printf("\nInitiate RUN \n");
     run(); 
     return 0; 
