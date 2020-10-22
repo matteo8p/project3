@@ -61,7 +61,6 @@ void *producer(int id)
         in = (in + 1) % B_num; 
         V(full); 
     }
-    return; 
 }
 
 void *consumer(int id)
@@ -74,7 +73,6 @@ void *consumer(int id)
         //V(empty); 
         yield(); 
     }
-    return; 
 }
 
 
