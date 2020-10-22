@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 typedef struct TCB_t {
-    int             *id; 
+    int             id; 
     struct TCB_t	*next;
     struct TCB_t	*prev;
     ucontext_t	context;
