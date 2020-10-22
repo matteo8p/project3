@@ -5,7 +5,7 @@ TCB_t *NewItem(int id)              //Returns a new TCB object newItem
    TCB_t *q = (TCB_t*)malloc(sizeof(TCB_t)); 
    q->next = NULL; 
    q->prev = NULL; 
-   q->producerID = *id; 
+   *(q->producerID) = id; 
    return q;        //Create newq and return the q  
 }
 
