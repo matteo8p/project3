@@ -14,8 +14,6 @@ void consumer();
 
 int main()
 {
-    S = (struct sem*) malloc(sizeof(struct sem)); 
-
     runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
     InitQueue(&runQ); 
 
@@ -52,6 +50,7 @@ void producer(int id)
     {
         P(S);
         int itemNumber = i + 1;
+        printf("%d", S->val); 
 
         if(S->val > 0)
         {
