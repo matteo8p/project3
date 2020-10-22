@@ -41,14 +41,9 @@ void consumer()
 int main()
 {
     struct TCB_t *threads[P_num + C_num]; 
-
     commonSem = (struct sem*) malloc(sizeof(struct sem)); 
 
-    runQ = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
-    InitQueue(&runQ); 
-
     InitSem(commonSem, 0);
-
 
     printf("Insert 4 numbers: \n");
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
