@@ -7,7 +7,7 @@ int P_num;      //# of producers
 int C_num;      //# of consumers 
 int N_num;      //# times they run their loops
 
-struct TCB_t *runQ = NULL; 
+struct TCB_t *runQ; 
 struct sem *full; 
 struct sem *empty; 
 
