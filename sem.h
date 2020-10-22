@@ -9,14 +9,12 @@ struct sem
 void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field with specified value 
 {
     semaphore->val = thisValue; 
-	semaphore->q = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
-	InitQueue(&(semaphore->q)); 
 }
 
 void P(struct sem *semaphore)
 {
     semaphore->val--;
-	if(semaphore->val < 0) 
+	if(semaphore->val <= 0) 
 	{
 		AddQueue(&(semaphore->q), DelQueue(&runQ));
 		yield(); 
@@ -26,9 +24,9 @@ void P(struct sem *semaphore)
 void V(struct sem *semaphore)
 {
 	semaphore->val++;
-	if (semaphore->val <= 0 && semaphore->q != NULL) 
+	if(semaphore->val <= 0)
 	{
 		AddQueue(&runQ, DelQueue(&(semaphore->q)));
 	}
-	// yield();
+	yield(); 
 }
