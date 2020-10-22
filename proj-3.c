@@ -25,7 +25,7 @@ int main()
     InitSem(full, 0); 
     InitSem(empty, B_num); 
 
-    InitQueue(&runQ); 
+    InitQueue(runQ); 
 
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
     struct TCB_t *threads[P_num + C_num];
@@ -39,12 +39,12 @@ int main()
         if(id > 0)              //ID > 0, create producer 
         {
             //printf("created producer thread"); 
-            start_thread(&producer, id);
+            start_thread(producer, id);
         }else                   //ID < 0, create consumer 
         {   
             id = -id;               
             //printf("Created consumer thread");                  
-            start_thread(&consumer, id); 
+            start_thread(consumer, id); 
         }
     }
     printf("Running threads"); 
