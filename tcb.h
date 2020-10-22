@@ -8,6 +8,7 @@ typedef struct TCB_t {
     struct TCB_t	*next;
     struct TCB_t	*prev;
     ucontext_t	context;
+    int producerID; 
 } TCB_t;	
 
 
