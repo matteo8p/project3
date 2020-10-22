@@ -74,7 +74,6 @@ void producer(int id)
         }else
         {
             printf("\n Producer %d is waiting \n", id); 
-            i--; 
         }
         V(S); 
         i++; 
@@ -96,7 +95,6 @@ void consumer(int id)
         }else
         {
             printf("\n Consumer %d is waiting\n", id); 
-            i--;
         }
         V(S); 
         //yield(); 
