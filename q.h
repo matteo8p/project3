@@ -15,7 +15,7 @@ void InitQueue(struct TCB_t *head)                    //Point empty queue(NULL) 
 
 void AddQueue(struct TCB_t *head, struct TCB_t *item) //adds a queue item, pointed to by "item", to the queue pointed by head 
 {
-   TCB_t *pointer = *head; 
+   TCB_t *pointer = head; 
 
    if(pointer == NULL)                                //If head is empty (NULL)   
    {
