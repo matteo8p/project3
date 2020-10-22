@@ -57,11 +57,11 @@ int main()
         if(id > 0)              //ID > 0, create producer 
         {
             TCB_t newthread; 
-            start_thread(producer, &newthread, id);
+            start_thread(&producer, &newthread, id);
         }else       //ID < 0, create consumer 
         {  
             TCB_t newthread;
-            start_thread(consumer, &newthread, id); 
+            start_thread(&consumer, &newthread, id); 
         }
     }
     
