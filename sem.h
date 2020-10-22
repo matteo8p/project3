@@ -14,7 +14,7 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 void P(struct sem *semaphore)
 {
 	if (semaphore->val <= 0) {
-		AddQueue(&(semaphore->q), DelQueue(&runQ);
+		AddQueue(&(semaphore->q), DelQueue(&runQ));
         yield(); 
 	}else
     {
@@ -26,7 +26,7 @@ void V(struct sem *semaphore)
 {
 	semaphore->val++;
 	if (semaphore->val <= 0) {
-		AddQueue(&runQ, DelQueue(&(semaphore->q));
+		AddQueue(&runQ, DelQueue(&(semaphore->q)));
 	}
 	yield();
 }
