@@ -28,7 +28,7 @@ int main()
     InitQueue(&runQ); 
 
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
-    struct TCB_t *threads[B_num];
+    struct TCB_t *threads[P_num + C_num];
 
     //printf("\n Buffer Size: %d # Producers: %d # Consumers: %d N: %d \n", B_num, P_num, C_num, N_num);   
     for(int k = 0; k < P_num + C_num; k++)
@@ -38,13 +38,11 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            TCB_t *newthread = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
-            start_thread(producer, newthread, id);
+            start_thread(producer, threads[k], id);
         }else                   //ID < 0, create consumer 
         {   
-            id = -id;  
-            TCB_t *newthread = (struct TCB_t*)malloc(sizeof(struct TCB_t));                                      
-            start_thread(consumer, newthread, id); 
+            id = -id;                                   
+            start_thread(consumer, threads[k], id); 
         }
     }
     printf("Running threads"); 
