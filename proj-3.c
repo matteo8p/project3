@@ -62,8 +62,7 @@ void producer(int id)
         {
             printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
 
-            TCB_t *newItemProduced = (struct TCB_t*) malloc(sizeof(struct TCB_t)); 
-            newItemProduced->producerID = id; 
+            TCB_t *newItemProduced = NewItem(id); 
             printf("passesd");
             AddQueue(&BufferQueue, newItemProduced); 
 
