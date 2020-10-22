@@ -81,9 +81,8 @@ void consumer(int id)
         }else
         {
             printf("\n Consumer %d is waiting\n", id); 
+            i--;
         }
-        
-        B_num++; 
         V(S); 
         //yield(); 
         i++; 
