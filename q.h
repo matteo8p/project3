@@ -1,11 +1,11 @@
 #include "tcb.h"
 
-TCB_t *NewItem(int id)              //Returns a new TCB object newItem 
+TCB_t *NewItem()              //Returns a new TCB object newItem 
 {
    TCB_t *q = (TCB_t*)malloc(sizeof(TCB_t)); 
    q->next = NULL; 
    q->prev = NULL; 
-   q->producerID = id; 
+
    return q;        //Create newq and return the q  
 }
 
