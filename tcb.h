@@ -11,7 +11,7 @@ typedef struct TCB_t {
 } TCB_t;	
 
 
-void init_TCB (TCB_t *tcb, void (*function)(void), void *stackP, int stack_size, int id) 
+void init_TCB(TCB_t *tcb, void (*function)(void), void *stackP, int stack_size, int id) 
 {
     memset(tcb, '\0', sizeof(TCB_t)); 
     getcontext(&tcb->context);

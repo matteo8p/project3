@@ -1,10 +1,13 @@
 #include "tcb.h"
 
-TCB_t *NewItem()              //Returns a new TCB object newItem 
+struct TCB_t *NewItem()              //Returns a new TCB object newItem 
 {
-   TCB_t *q = (TCB_t*)malloc(sizeof(TCB_t)); 
-   q->next = NULL; 
-   q->prev = NULL; 
+   struct TCB_t *q = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
+   if(!q)
+   {
+      q->next = NULL; 
+      q->prev = NULL; 
+   }
    return q;        //Create newq and return the q  
 }
 
