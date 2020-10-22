@@ -53,7 +53,7 @@ void producer(int id)
         P(S);
         int itemNumber = i + 1;
 
-        if(S->val >= 0)
+        if(S->val > 0)
         {
             printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
         }else
