@@ -17,8 +17,8 @@ void P(struct sem *semaphore, int id)
 	if (semaphore->val <= 0) {
 		printf("Producer/Consumer %d blocked", id); 
 		struct TCB_t *t = DelQueue(runQ); 
-		AddQueue(&(semaphore->q), t);
-		swapcontext(&(semaphore->q->context), &(runQ->context));
+		AddQueue(semaphore->q, t);
+		swapcontext(&(t->context), &(runQ->context));
 	}else
 	{
 		semaphore->val--;
