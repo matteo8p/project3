@@ -56,7 +56,7 @@ void P(semaphore *sem) {
 
 
 	// Check if the Semaphore value is zero or negative
-	if (sem->value <= 0) {
+	if (sem->value < 0) {
 		// Take the current process from the Run Queue
 		printf("\n Blocked \n");
 		t = delQueue(runQ);
