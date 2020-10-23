@@ -29,10 +29,10 @@ void P(semaphore *sem, int id, bool producer) {
 	if (sem->value < 0) {
 		if(producer)
 		{
-			printf("\n Producer %d is blocked", id); 
+			printf("\n Producer %d is blocked \n", id); 
 		}else
 		{
-			printf("\n Consumer &d is blocked", id); 
+			printf("\n Consumer &d is blocked \n", id); 
 		}
 		p = delQueue(runQ);
 		addQueue(sem->sleepQ, p);
