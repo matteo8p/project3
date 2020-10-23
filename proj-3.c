@@ -37,11 +37,11 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            startThread(producer);
+            start_thread(producer);
         }else                   //ID < 0, create consumer 
         {   
             id = -id;                       
-            startThread(consumer); 
+            start_thread(consumer); 
         }
     }
     printf("Running threads"); 

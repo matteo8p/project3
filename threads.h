@@ -6,7 +6,7 @@ void startThread(void (*function)(void));
 void run();
 void yield();
 
-void startThread(void (*function)(void)) {
+void start_thread(void (*function)(void)) {
 	TCB_t *temp = newItem();	
 	void *stack = (void *) malloc(8192);	
 	init_TCB(temp, function, stack, 8192);	
