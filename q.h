@@ -9,27 +9,27 @@ TCB_t *NewItem()              //Returns a new TCB object newItem
    return q;        //Create newq and return the q  
 }
 
-void InitQueue(struct TCB_t **head)                    //Point empty queue(NULL) to head 
+void InitQueue(struct TCB_t *head)                    //Point empty queue(NULL) to head 
 {
-   *head = NULL;                             
+   head = NULL;                             
 }
 
-void AddQueue(struct TCB_t **head, struct TCB_t *item) //adds a queue item, pointed to by "item", to the queue pointed by head 
+void AddQueue(struct TCB_t *head, struct TCB_t *item) //adds a queue item, pointed to by "item", to the queue pointed by head 
 {
-   TCB_t *pointer = *head; 
+   TCB_t *pointer = head; 
 
    if(pointer == NULL)                                //If head is empty (NULL)   
    {
-      *head = item;                                   //set head to item. Point to itself. 
-      (*head)->next = *head; 
-      (*head)->prev = *head;                       
+      head = item;                                   //set head to item. Point to itself. 
+      (head)->next = head; 
+      (head)->prev = head;                       
    }else                                              //If head node exists 
    {
-      pointer = (*head)->prev;                        //Pointer is the last element in queue 
+      pointer = (head)->prev;                        //Pointer is the last element in queue 
       item->next = *head;  
       item->prev = pointer; 
       pointer->next = item; 
-      (*head)->prev = item;                     
+      (head)->prev = item;                     
    }
 }
 
