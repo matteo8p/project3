@@ -62,6 +62,7 @@ void producer(int id)
         Buffer[in] = id; 
         in = (in + 1) % B_num;
         V(full);
+        yield(); 
         i++; 
     }
     // TCB_t* t = delQueue(runQ); 
@@ -80,6 +81,7 @@ void consumer(int id)
         out = (out + 1) % B_num; 
 
         V(empty); 
+        yield(); 
         i++; 
     }
     // TCB_t* t = delQueue(runQ); 

@@ -38,6 +38,7 @@ void P(semaphore *sem, int id)
 		}else
 		{
 			sem->value--; 
+			break; 
 		}
 	}
 }
@@ -50,7 +51,6 @@ void V(semaphore *sem)
 		struct TCB_t *tcb = delQueue(sem->sleepQ);
 		addQueue(runQ, tcb);
 	}
-	yield();
 }
 
 #endif
