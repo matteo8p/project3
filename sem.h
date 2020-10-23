@@ -41,7 +41,6 @@ void P(semaphore *sem, int id)
 		}else
 		{
 			sem->value--; 
-			return; 
 		}
 	}
 }
@@ -54,7 +53,7 @@ void V(semaphore *sem)
 		addQueue(runQ, tcb);
 	}
 	sem->value++;
-	yield();
+	yield(runQ);
 }
 
 #endif
