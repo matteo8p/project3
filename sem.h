@@ -32,6 +32,7 @@ void P(semaphore *sem) {
 		addQueue(sem->sleepQ, p);
 		swapcontext(&(p->context), &(runQ->header->context));
 	}
+	yield(); 
 }
 
 void V(semaphore *sem) {
