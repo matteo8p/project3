@@ -20,9 +20,6 @@ void consumer();
 int main()
 {   
     scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
-    full = (struct sem *)malloc(sizeof(struct sem)); 
-    empty = (struct sem *)malloc(sizeof(struct sem)); 
-
     InitSem(full, 0); 
     InitSem(empty, B_num); 
 
