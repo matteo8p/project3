@@ -51,7 +51,7 @@ void initSem(semaphore *sem, int value) {
 void P(semaphore *sem) {
 
 	struct TCB_t *t; 
-	sem->value--;
+
 	if (sem->value <= 0) {
 		// Take the current process from the Run Queue
 		printf("\n Blocked \n");
@@ -62,8 +62,10 @@ void P(semaphore *sem) {
 		
 		// Swap to the next process in the Run Queue
 		swapcontext(&(t->context), &(runQ->header->context));
+	}else
+	{
+		sem->value--;
 	}
-	return;
 }
 
 //----------//
