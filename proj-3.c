@@ -20,14 +20,11 @@ void consumer();
 int main()
 {   
     scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
-
-    runQ = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
     full = (struct sem *)malloc(sizeof(struct sem)); 
     empty = (struct sem *)malloc(sizeof(struct sem)); 
 
     InitSem(full, 0); 
     InitSem(empty, B_num); 
-    InitQueue(runQ); 
 
     Buffer = (int*)malloc(B_num * sizeof(int));
 
