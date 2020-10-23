@@ -48,6 +48,9 @@ void initSem(semaphore *sem, int value) {
 //----------//
 // P Method //
 //----------//
+//----------//
+// P Method //
+//----------//
 void P(semaphore *sem) {
 	// Declare a temporary TCB to hold the popped process
 	struct TCB_t *p; 
@@ -70,19 +73,15 @@ void P(semaphore *sem) {
 // V Method //
 //----------//
 void V(semaphore *sem) {
-	// Declare a temporary TCB to hold the popped process
 	struct TCB_t *t; 
-
 	sem->value++;
-		// Take a process from the Semaphore's Sleep Queue
+
+	if (sem->value <= 0) {
 		t = delQueue(sem->sleepQ);
-
 		addQueue(runQ, t);
+	}
 
-	// Call the next process to eliminate bounded waiting
 	yield();
-
-	return;
 }
 
 #endif
