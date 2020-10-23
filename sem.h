@@ -49,18 +49,17 @@ void initSem(semaphore *sem, int value) {
 // P Method //
 //----------//
 void P(semaphore *sem) {
+	// Declare a temporary TCB to hold the popped process
+	struct TCB_t *p; 
 
-	struct TCB_t *t; 
-
-	if (sem->value <= 0) {
+	if (sem->value == 0) {
 		// Take the current process from the Run Queue
-		printf("\n Blocked \n");
-		t = delQueue(runQ);
+		p = delQueue(runQ);
 		
 		// Block the process
-		addQueue(sem->sleepQ, t);
-		// Swap to the next process in the Run Queue
-		swapcontext(&(t->context), &(runQ->header->context));
+		addQueue(sem->sleepQ, p);
+		
+		yield(); 
 	}else
 	{
 		sem->value--;
@@ -71,15 +70,19 @@ void P(semaphore *sem) {
 // V Method //
 //----------//
 void V(semaphore *sem) {
+	// Declare a temporary TCB to hold the popped process
 	struct TCB_t *t; 
+
 	sem->value++;
-
-	if (sem->value <= 0) {
+		// Take a process from the Semaphore's Sleep Queue
 		t = delQueue(sem->sleepQ);
-		addQueue(runQ, t);
-	}
 
+		addQueue(runQ, t);
+
+	// Call the next process to eliminate bounded waiting
 	yield();
+
+	return;
 }
 
 #endif
