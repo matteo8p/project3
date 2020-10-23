@@ -56,7 +56,7 @@ void P(semaphore *sem) {
 	struct TCB_t *p; 
 
 	if (sem->value == 0) {
-		// Take the current process from the Run Queue
+		printf("Blocked"); 
 		p = delQueue(runQ);
 		
 		// Block the process
