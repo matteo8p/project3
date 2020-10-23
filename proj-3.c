@@ -29,7 +29,6 @@ int main()
     initSem(full, 0); 
     initSem(empty, B_num); 
 
-
     Buffer = (int*)malloc(B_num * sizeof(int));
 
     for(int k = 0; k < P_num + C_num; k++)
@@ -82,7 +81,7 @@ void consumer(int id)
         out = (out + 1) % B_num; 
 
         V(empty); 
-        yield(); 
+
         i++; 
     }
     //yield();
