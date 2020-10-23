@@ -6,10 +6,10 @@ void startThread(void (*function)(void));
 void run();
 void yield();
 
-void start_thread(void (*function)(void)) {
+void start_thread(void (*function)(void), int id) {
 	TCB_t *temp = newItem();	
 	void *stack = (void *) malloc(8192);	
-	init_TCB(temp, function, stack, 8192);	
+	init_TCB(temp, function, stack, 8192, id);	
 	addQueue(runQ, temp);	
 }
 
