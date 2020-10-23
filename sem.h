@@ -42,7 +42,6 @@ void P(semaphore *sem, int id, bool producer) {
 		sem->value--;
 		return; 
 	}
-	
 }
 
 void V(semaphore *sem) {
