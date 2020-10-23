@@ -38,10 +38,10 @@ void V(semaphore *sem) {
 	struct TCB_t *t; 
 	sem->value++;
 
-
+	if (sem->value <= 0) {
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
-
+	}
 	yield();
 }
 
