@@ -37,7 +37,7 @@ void P(semaphore *sem, int id)
 			}
 			struct TCB_t *tcb = delQueue(runQ);
 			addQueue(sem->sleepQ, tcb);
-			swapcontext(&(t->context), &(runQ->header->context));
+			swapcontext(&(tcb->context), &(runQ->header->context));
 		}else
 		{
 			sem->value--; 
