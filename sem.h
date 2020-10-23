@@ -10,7 +10,7 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 {
 	semaphore = malloc(sizeof(struct sem)); 
     semaphore->val = thisValue; 
-	InitQueue(semaphore->q); 
+	InitQueue(&(semaphore->q)); 
 }
 
 void P(struct sem *semaphore)
