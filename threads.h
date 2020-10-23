@@ -1,6 +1,6 @@
 #include "q.h" 
 
-extern struct TCB_t *runQ; //Global header pointer
+struct TCB_t *runQ; //Global header pointer
 
 void start_thread(void (*function)(void), TCB_t *thread, int id)
 { 

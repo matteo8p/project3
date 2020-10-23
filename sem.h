@@ -31,7 +31,7 @@ void V(struct sem *semaphore, int id)
 
 	if(semaphore->val <= 0 && semaphore->q != NULL)
 	{
-		AddQueue(&runQ, DelQueue(semaphore->q));
+		AddQueue(runQ, DelQueue(semaphore->q));
 	}else
 	{
 			semaphore->val++;
