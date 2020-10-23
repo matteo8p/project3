@@ -59,7 +59,6 @@ void P(semaphore *sem) {
 		
 		// Block the process
 		addQueue(sem->sleepQ, t);
-		yield(); 
 		// Swap to the next process in the Run Queue
 		swapcontext(&(t->context), &(runQ->header->context));
 
@@ -67,6 +66,7 @@ void P(semaphore *sem) {
 	{
 		sem->value--;
 	}
+	yield(); 
 }
 
 //----------//
