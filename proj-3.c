@@ -39,12 +39,12 @@ int main()
         if(id > 0)              //ID > 0, create producer 
         {
             TCB_t *newThread = NewItem(); 
-            start_thread(&producer, newThread, id);
+            start_thread(&producer, id);
         }else                   //ID < 0, create consumer 
         {   
             TCB_t *newThread = NewItem();   
             id = -id;                       
-            start_thread(&consumer, newThread, id); 
+            start_thread(&consumer, id); 
         }
     }
     printf("Running threads"); 
