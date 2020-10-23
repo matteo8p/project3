@@ -15,9 +15,10 @@ void P(struct sem *semaphore, int id)
 {
 	if (semaphore->val <= 0) {
 		printf("P Blocked"); 
-		struct TCB_t *t = DelQueue(runQ); 
-		AddQueue(&(semaphore->q), t);
-		swapcontext(&(t->context), &(runQ->context)); 
+		yield(); 
+		// struct TCB_t *t = DelQueue(runQ); 
+		// AddQueue(&(semaphore->q), t);
+		// swapcontext(&(t->context), &(runQ->context)); 
 	}else
 	{
 		semaphore->val--;
