@@ -7,9 +7,8 @@ int P_num;      //# of producers
 int C_num;      //# of consumers 
 int N_num;      //# times they run their loops
 
-struct sem *full; 
-struct sem *empty; 
-struct TCB_t *runQ = NULL; 
+struct semaphore *full; 
+struct semaphore *empty; 
 
 int in = 0; int out = 0; 
 
@@ -23,6 +22,7 @@ int main()
     scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
     full = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     empty = (struct semaphore *)malloc(sizeof(struct semaphore)); 
+    runQ = (struct queue*)malloc(sizeof(struct queue)); 
 
     InitSem(full, 0); 
     InitSem(empty, B_num); 
