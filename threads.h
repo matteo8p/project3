@@ -1,43 +1,23 @@
-// Name: Cory Siebler & Marcus Finney
-// Class: CSE430 #12109
-// Assignment: Project 2
-// Description: Holds routines to start threads, yield, and run
-
 #ifndef THREADS_H
 #define THREADS_H
 
-//---------------//
-// Include Files //
-//---------------//
 #include "q.h"
 
-//-----------------------------//
-// Global Variable Declaration //
-//-----------------------------//
 struct queue *runQ;
 
-//----------------------------//
-// Method Forward Declaration //
-//----------------------------//
 void startThread(void (*function)(void), int id);
 void run();
 void yield();
 
-//---------------------//
-// start_thread Method //
-//---------------------//
 void startThread(void (*function)(void), int id) {
-	TCB_t *temp = newItem();	// Create a new TCB to store process
-	void *stack = (void *) malloc(8192);	// Allocate the stack memory
-	init_TCB(temp, function, stack, 8192, id);	// Initialize the new TCB
-	addQueue(runQ, temp);	// Put the new TCB into the Run Queue
+	TCB_t *temp = newItem();	
+	void *stack = (void *) malloc(8192);	
+	init_TCB(temp, function, stack, 8192, id);	
+	addQueue(runQ, temp);	
 
 	return;
 }
 
-//------------//
-// run Method //
-//------------//
 void run() {
 	// Declare the context of the first TCB
 	ucontext_t parent;
@@ -51,9 +31,6 @@ void run() {
 	return;
 }
 
-//--------------//
-// yield Method //
-//--------------//
 void yield() {
 	// Declare the context of the threaded TCBs
 	ucontext_t from, to;
@@ -72,7 +49,6 @@ void yield() {
 	
 	// Swap the currently running process to the next process in the Queue
 	swapcontext(&from, &to);
-
 	return;
 }
 

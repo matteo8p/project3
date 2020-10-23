@@ -23,9 +23,6 @@ void initSem(semaphore *sem, int value) {
 }
 
 void P(semaphore *sem, int id, bool producer) {
-
-	struct TCB_t *p; 
-
 	if (sem->value <= 0) {
 		if(producer)
 		{
@@ -34,14 +31,13 @@ void P(semaphore *sem, int id, bool producer) {
 		{
 			printf("\n Consumer %d is waiting \n", id); 
 		}
-		p = delQueue(runQ);
-		addQueue(sem->sleepQ, p);
-		swapcontext(&(p->context), &(runQ->header->context));
+		struct TCB_t *t = delQueue(runQ);
+		addQueue(sem->sleepQ, t);
+		swapcontext(&(runQ->header->context), &(t->context));
 	}else
 	{
 		sem->value--;
 	}
-	
 }
 
 void V(semaphore *sem) {
@@ -52,6 +48,7 @@ void V(semaphore *sem) {
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
 	}
+	yield(); 
 }
 
 #endif
