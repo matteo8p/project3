@@ -20,22 +20,18 @@ void P(struct sem *semaphore, int id)
 		swapcontext(&(t->context), &(runQ->context)); 
 	}else
 	{
-			semaphore->val--;
+		semaphore->val--;
 	}
 	
 }
 
 void V(struct sem *semaphore, int id)
 {
-
+	semaphore->val++;
 	if(semaphore->val <= 0)
 	{
 		printf("V Blocked"); 
 		AddQueue(&runQ, DelQueue(semaphore->q));
-	}else
-	{
-			semaphore->val++; 
 	}
-	
 	yield(); 
 }
