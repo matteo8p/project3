@@ -23,10 +23,10 @@ int main()
     full = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     empty = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     runQ = (struct queue*)malloc(sizeof(struct queue)); 
-
+    initQueue(runQ); 
     initSem(full, 0); 
     initSem(empty, B_num); 
-    initQueue(runQ); 
+
 
     Buffer = (int*)malloc(B_num * sizeof(int));
 
