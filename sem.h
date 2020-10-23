@@ -45,10 +45,13 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
+	if(sem->value <= 0 && sem->sleepQ != NULL)
+	{
+		struct TCB_t *t; 
+		t = delQueue(sem->sleepQ);
+		addQueue(runQ, t);
+	}
 	sem->value++;
-	struct TCB_t *t; 
-	t = delQueue(sem->sleepQ);
-	addQueue(runQ, t);
 }
 
 #endif

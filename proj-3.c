@@ -52,7 +52,6 @@ int main()
 
 void producer(int id)
 {
-    TCB_t *tcb; 
     int i = 0; 
     while(i < N_num) 
     {
@@ -66,16 +65,11 @@ void producer(int id)
         V(full);
         yield(); 
     }
-    tcb = delQueue(runQ); 
-    if(runQ == NULL) 
-        exit(0); 
-    swapcontext(&(tcb->context), &(runQ->header->context)); 
-
+    delQueue(runQ); 
 }
 
 void consumer(int id)
 {
-    TCB_t *tcb; 
     int i = 0;
     while(i < N_num)
     {
@@ -88,10 +82,7 @@ void consumer(int id)
         V(empty); 
         yield();
     }
-    tcb = delQueue(runQ); 
-    if(runQ == NULL) 
-        exit(0); 
-    swapcontext(&(tcb->context), &(runQ->header->context)); 
+    delQueue(runQ); 
 }
 
 
