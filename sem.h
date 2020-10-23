@@ -18,7 +18,8 @@ void P(struct sem *semaphore, int id)
 		// yield(); 
 		struct TCB_t *t = DelQueue(runQ); 
 		AddQueue(&(semaphore->q), t);
-		swapcontext(&(t->context), &(runQ->context)); 
+		
+		swapcontext(&(runQ->context), &(t->context)); 
 	}else
 	{
 		semaphore->val--;
