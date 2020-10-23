@@ -26,7 +26,7 @@ void AddQueue(struct TCB_t *head, struct TCB_t *item) //adds a queue item, point
    }else                                              //If head node exists 
    {
       pointer = (head)->prev;                        //Pointer is the last element in queue 
-      item->next = *head;  
+      item->next = head;  
       item->prev = pointer; 
       pointer->next = item; 
       (head)->prev = item;                     
