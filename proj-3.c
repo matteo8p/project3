@@ -7,7 +7,6 @@ int P_num;      //# of producers
 int C_num;      //# of consumers 
 int N_num;      //# times they run their loops
 
-struct TCB_t *runQ = NULL; 
 struct sem *full = NULL; 
 struct sem *empty = NULL; 
 
@@ -24,9 +23,6 @@ int main()
     full = (struct sem *)malloc(sizeof(struct sem)); 
     empty = (struct sem *)malloc(sizeof(struct sem)); 
 
-    InitQueue(&runQ); 
-
-    
     InitSem(full, 0); 
     InitSem(empty, B_num); 
 
