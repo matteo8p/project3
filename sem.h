@@ -53,7 +53,7 @@ void P(semaphore *sem) {
 	struct TCB_t *t; 
 
 	// Decrement the Semaphore value
-	sem->value--;
+
 
 	// Check if the Semaphore value is zero or negative
 	if (sem->value <= 0) {
@@ -66,7 +66,11 @@ void P(semaphore *sem) {
 		
 		// Swap to the next process in the Run Queue
 		swapcontext(&(t->context), &(runQ->header->context));
+	}else
+	{
+		sem->value--;
 	}
+	
 
 	return;
 }
