@@ -30,24 +30,21 @@ int main()
 
     Buffer = (int*)malloc(B_num * sizeof(int));
 
-    // for(int k = 0; k < P_num + C_num; k++)
-    // {
-    //     int id; 
-    //     scanf("%d", &id);
+    for(int k = 0; k < P_num + C_num; k++)
+    {
+        int id; 
+        scanf("%d", &id);
 
-    //     if(id > 0)              //ID > 0, create producer 
-    //     {
-    //         startThread(producer);
-    //     }else                   //ID < 0, create consumer 
-    //     {   
-    //         id = -id;                       
-    //         startThread(consumer); 
-    //     }
-    // }
-    startThread(producer);
-    startThread(consumer);
-    startThread(producer);
-    startThread(producer);
+        if(id > 0)              //ID > 0, create producer 
+        {
+            startThread(producer);
+        }else                   //ID < 0, create consumer 
+        {   
+            id = -id;                       
+            startThread(consumer); 
+        }
+    }
+
     run(); 
     return 0; 
 }
