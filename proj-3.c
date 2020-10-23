@@ -61,11 +61,12 @@ void producer(int id)
 
         Buffer[in] = id; 
         in = (in + 1) % B_num;
-        i++; 
         V(full);
+        i++; 
         yield(); 
     }
-    delQueue(runQ); 
+    TCB_t* t = delQueue(runQ); 
+    swapcontext(&(t->context), &(runQ->header->context));
 }
 
 void consumer(int id)
@@ -78,11 +79,13 @@ void consumer(int id)
 
         Buffer[out] = 0; 
         out = (out + 1) % B_num; 
-        i++; 
+
         V(empty); 
+        i++; 
         yield();
     }
-    delQueue(runQ); 
+    TCB_t* t = delQueue(runQ); 
+    swapcontext(&(t->context), &(runQ->header->context));
 }
 
 
