@@ -23,15 +23,20 @@ void initSem(semaphore *sem, int value) {
 }
 
 void P(semaphore *sem, int id, bool producer) {
+	bool shownOnce = false; 
 	while(1)
 	{
 		if (sem->value == 0) {
-			if(producer)
+			if(shownOnce == false)
 			{
-				printf("\n Producer %d is waiting \n", id); 
-			}else
-			{
-				printf("\n Consumer %d is waiting \n", id); 
+				if(producer)
+				{
+					printf("\n Producer %d is waiting \n", id); 
+				}else
+				{
+					printf("\n Consumer %d is waiting \n", id); 
+				}
+				shownOnce = true; 
 			}
 			struct TCB_t *t = delQueue(runQ);
 			addQueue(sem->sleepQ, t);
@@ -48,11 +53,10 @@ void P(semaphore *sem, int id, bool producer) {
 void V(semaphore *sem) {
 	struct TCB_t *t; 
 	sem->value++;
-	if(sem->value <= 0)
-	{
+
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
-	}
+	
 	//yield(); 
 }
 

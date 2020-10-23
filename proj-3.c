@@ -81,7 +81,7 @@ void consumer(int id)
         out = (out + 1) % B_num; 
 
         V(empty); 
-
+        yield(); 
         i++; 
     }
     //yield();
