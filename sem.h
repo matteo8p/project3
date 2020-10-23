@@ -30,10 +30,8 @@ void P(semaphore *sem) {
 		printf("\n Blocked \n"); 
 		p = delQueue(runQ);
 		addQueue(sem->sleepQ, p);
-		// swapcontext(&(p->context), &(runQ->header->context));
-			yield(); 
+		swapcontext(&(p->context), &(runQ->header->context));
 	}
-
 }
 
 void V(semaphore *sem) {
