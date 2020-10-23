@@ -53,8 +53,7 @@ void V(semaphore *sem)
 		struct TCB_t *tcb = delQueue(sem->sleepQ);
 		addQueue(runQ, tcb);
 	}
-
-	yield(runQ);
+	yield();
 }
 
 #endif
