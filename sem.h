@@ -25,8 +25,7 @@ void P(struct sem *semaphore)
 
 void V(struct sem *semaphore)
 {
-
-	if(semaphore->val > 1)
+	if(semaphore->val <= 0)
 	{
 		AddQueue(&runQ, DelQueue(semaphore->q));
 	}else
