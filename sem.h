@@ -36,11 +36,10 @@ void P(semaphore *sem, int id, bool producer) {
 				{
 					printf("\n Consumer %d is waiting \n", id); 
 				}
-				shownOnce = true; 
+				//shownOnce = true; 
 			}
 			struct TCB_t *t = delQueue(runQ);
 			addQueue(sem->sleepQ, t);
-			// yield(); 
 			swapcontext(&(t->context), &(runQ->header->context));
 		}else
 		{
