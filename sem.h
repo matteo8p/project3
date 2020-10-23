@@ -19,7 +19,7 @@ void P(struct sem *semaphore, int id)
 		AddQueue(&(semaphore->q), t);
 		
 		swapcontext(&(runQ->context), &(t->context)); 
-		// yield(); 
+		yield(); 
 	}else
 	{
 		semaphore->val--;
