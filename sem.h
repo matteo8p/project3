@@ -25,15 +25,12 @@ void initSem(semaphore *sem, int value) {
 void P(semaphore *sem) {
 
 	struct TCB_t *p; 
-
-	if (sem->value == 0) {
+	sem->value--;
+	if (sem->value < 0) {
+		printf("\n Blocked \n"); 
 		p = delQueue(runQ);
 		addQueue(sem->sleepQ, p);
 		swapcontext(&(p->context), &(runQ->header->context));
-		printf("\n Blocked \n"); 
-	}else
-	{
-		sem->value--;
 	}
 }
 
