@@ -45,12 +45,6 @@ void initSem(semaphore *sem, int value) {
 	return;
 }
 
-//----------//
-// P Method //
-//----------//
-//----------//
-// P Method //
-//----------//
 void P(semaphore *sem) {
 	// Declare a temporary TCB to hold the popped process
 	struct TCB_t *p; 
@@ -66,9 +60,6 @@ void P(semaphore *sem) {
 	}
 }
 
-//----------//
-// V Method //
-//----------//
 void V(semaphore *sem) {
 	struct TCB_t *t; 
 	sem->value++;
@@ -77,7 +68,6 @@ void V(semaphore *sem) {
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
 	}
-
 	yield();
 }
 
