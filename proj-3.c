@@ -62,7 +62,7 @@ void producer(int id)
         printf("\n Producer %d is producing item number %d\n", id, itemNumber); 
         V(full);
     }
-    yield();  
+
 }
 
 void consumer(int id)
