@@ -14,13 +14,15 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
 
 void P(struct sem *semaphore, int id)
 {
-	semaphore->val--;
 	if (semaphore->val <= 0) {
 		printf("Producer/Consumer %d blocked", id); 
 		struct TCB_t *t = DelQueue(runQ); 
 		AddQueue(&(semaphore->q), t);
 		while(runQ == NULL) ;
 		swapcontext(&(t->context), &(runQ->context));
+	}else
+	{
+		semaphore->val--;
 	}
 }
 
