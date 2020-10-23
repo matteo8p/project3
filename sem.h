@@ -9,7 +9,7 @@ typedef struct semaphore {
 } semaphore;
 
 void initSem(semaphore*, int);
-void P(semaphore*, int id, bool producer);
+void P(semaphore*, int id);
 void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
@@ -22,11 +22,11 @@ void initSem(semaphore *sem, int value) {
 	return;
 }
 
-void P(semaphore *sem, int id, bool producer) {
+void P(semaphore *sem, int id) {
 
 	if (sem->value == 0) 
 	{
-		if(producer)
+		if(id > 0)
 		{
 			printf("\n Producer %d is waiting \n", id); 
 		}else
@@ -52,7 +52,7 @@ void V(semaphore *sem) {
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
 	}
-	//yield(); 
+	yield(); 
 }
 
 #endif

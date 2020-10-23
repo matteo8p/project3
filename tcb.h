@@ -19,7 +19,6 @@ void init_TCB(TCB_t *tcb, void *function, void *stackP, int stack_size, int id) 
 	tcb->context.uc_stack.ss_sp = stackP;
 	tcb->context.uc_stack.ss_size = (size_t) stack_size;
 	makecontext(&tcb->context, function, 2, id);
-
 	return;
 }
 
