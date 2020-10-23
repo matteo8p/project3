@@ -23,11 +23,11 @@ int main()
     full = (struct sem *)malloc(sizeof(struct sem)); 
     empty = (struct sem *)malloc(sizeof(struct sem)); 
 
-    InitSem(full, 0); 
-    InitSem(empty, B_num); 
-
     InitQueue(&runQ); 
    	scanf("%d,%d,%d,%d",&B_num,&P_num,&C_num,&N_num);
+    
+    InitSem(full, 0); 
+    InitSem(empty, B_num); 
 
     Buffer = (int*)malloc(B_num * sizeof(int));
 
