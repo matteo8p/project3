@@ -27,7 +27,7 @@ int main()
 
     InitSem(full, 0); 
     InitSem(empty, B_num); 
-    InitQueue(runQ); 
+    InitQueue(&runQ); 
 
     Buffer = (int*)malloc(B_num * sizeof(int));
 
