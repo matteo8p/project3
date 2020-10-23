@@ -25,6 +25,7 @@ int main()
 
     InitSem(full, 0); 
     InitSem(empty, B_num); 
+    InitQueue(runQ); 
 
     Buffer = (int*)malloc(B_num * sizeof(int));
 
@@ -36,12 +37,12 @@ int main()
         if(id > 0)              //ID > 0, create producer 
         {
             TCB_t *newThread = NewItem(); 
-            start_thread(&producer, id);
+            start_thread(producer, id);
         }else                   //ID < 0, create consumer 
         {   
             TCB_t *newThread = NewItem();   
             id = -id;                       
-            start_thread(&consumer, id); 
+            start_thread(consumer, id); 
         }
     }
     printf("Running threads"); 
