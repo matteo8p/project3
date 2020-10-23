@@ -24,8 +24,8 @@ void initSem(semaphore *sem, int value) {
 
 void P(semaphore *sem, int id) 
 {
-	sem->value--;
-	if(sem->value < 0) 
+
+	if(sem->value == 0) 
 	{
 		if(id > 0)
 		{
@@ -37,18 +37,24 @@ void P(semaphore *sem, int id)
 		struct TCB_t *t = delQueue(runQ);
 		addQueue(sem->sleepQ, t);
 		swapcontext(&(t->context), &(runQ->header->context));
+	}else
+	{
+			sem->value--;
 	}
+	
 }
 
 void V(semaphore *sem) 
 {
-	sem->value++;
+
 	if(sem->value <= 0 && sem->sleepQ != NULL)
 	{
 		struct TCB_t *t; 
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
 	}
+		sem->value++;
+	yield();
 }
 
 #endif
