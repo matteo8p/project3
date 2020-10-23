@@ -9,7 +9,7 @@ typedef struct semaphore {
 } semaphore;
 
 void initSem(semaphore*, int);
-void P(semaphore*);
+void P(semaphore*, int id, bool producer);
 void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
@@ -22,12 +22,18 @@ void initSem(semaphore *sem, int value) {
 	return;
 }
 
-void P(semaphore *sem) {
+void P(semaphore *sem, int id, bool producer) {
 
 	struct TCB_t *p; 
 	sem->value--;
 	if (sem->value < 0) {
-		printf("\n Blocked \n"); 
+		if(producer)
+		{
+			printf("\n Producer %d is blocked", id); 
+		}else
+		{
+			printf("\n Consumer &d is blocked", id); 
+		}
 		p = delQueue(runQ);
 		addQueue(sem->sleepQ, p);
 		swapcontext(&(p->context), &(runQ->header->context));
