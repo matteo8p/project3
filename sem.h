@@ -25,19 +25,23 @@ void initSem(semaphore *sem, int value) {
 void P(semaphore *sem, int id, bool producer) {
 
 	struct TCB_t *p; 
-	sem->value--;
+
 	if (sem->value < 0) {
 		if(producer)
 		{
-			printf("\n Producer %d is blocked \n", id); 
+			printf("\n Producer %d is waiting \n", id); 
 		}else
 		{
-			printf("\n Consumer %d is blocked \n", id); 
+			printf("\n Consumer %d is waiting \n", id); 
 		}
 		p = delQueue(runQ);
 		addQueue(sem->sleepQ, p);
 		swapcontext(&(p->context), &(runQ->header->context));
+	}else
+	{
+		sem->value--;
 	}
+	
 }
 
 void V(semaphore *sem) {
