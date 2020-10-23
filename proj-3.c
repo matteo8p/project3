@@ -9,6 +9,7 @@ int N_num;      //# times they run their loops
 
 struct sem *full; 
 struct sem *empty; 
+struct TCB_t *runQ = NULL; 
 
 int in = 0; int out = 0; 
 
