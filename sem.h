@@ -11,7 +11,7 @@ void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field
     semaphore->val = thisValue; 
 }
 
-void P(struct sem *semaphore)
+void P(struct sem *semaphore, int id)
 {
 	if (semaphore->val <= 0) {
 		struct TCB_t *t = DelQueue(runQ); 
@@ -23,14 +23,12 @@ void P(struct sem *semaphore)
 	}
 }
 
-void V(struct sem *semaphore)
+void V(struct sem *semaphore, int id)
 {
-	if(semaphore != NULL)
+	semaphore->val++; 
+	if(semaphore->val <= 0)
 	{
 		AddQueue(&runQ, DelQueue(semaphore->q));
-	}else
-	{
-		semaphore->val++; 
 	}
 	yield(); 
 }
