@@ -24,7 +24,7 @@ int main()
     full = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     empty = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     runQ = (struct queue*)malloc(sizeof(struct queue)); 
-    
+
     initQueue(runQ); 
     initSem(full, 0); 
     initSem(empty, B_num); 
@@ -39,11 +39,11 @@ int main()
 
         if(id > 0)              //ID > 0, create producer 
         {
-            startThread(producer);
+            startThread(producer, id);
         }else                   //ID < 0, create consumer 
         {   
             id = -id;                       
-            startThread(consumer); 
+            startThread(consumer, id); 
         }
     }
 
