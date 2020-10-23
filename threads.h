@@ -9,7 +9,7 @@ void start_thread(void (*function)(void), int id)
 	stack = malloc(8192);
 	item = (TCB_t *)malloc(sizeof(TCB_t));
 	init_TCB(item, function, stack, 8192, id);
-	addQueue(runQ,item);
+	AddQueue(runQ,item);
 }
 
 void run()                                                      //Given code 
