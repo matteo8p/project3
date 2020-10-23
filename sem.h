@@ -26,7 +26,7 @@ void P(semaphore *sem, int id, bool producer) {
 
 	struct TCB_t *p; 
 
-	if (sem->value < 0) {
+	if (sem->value <= 0) {
 		if(producer)
 		{
 			printf("\n Producer %d is waiting \n", id); 
