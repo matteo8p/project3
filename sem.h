@@ -50,7 +50,7 @@ void V(semaphore *sem)
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
 	}
-	yield();
+	yield(runQ);
 }
 
 #endif
