@@ -13,7 +13,6 @@ void initSem(semaphore *sem, int value) {
 	sem->semQ = (struct queue*) malloc(sizeof(struct queue));
 	initQueue(sem->semQ);
 	sem->value = value;
-	return;
 }
 
 void P(semaphore *sem, int id) 
@@ -31,7 +30,8 @@ void P(semaphore *sem, int id)
 			}
 			struct TCB_t *tcb = delQueue(runQ);
 			addQueue(sem->semQ, tcb);
-			swapcontext(&(tcb->context), &(runQ->headPointer->context));
+			//swapcontext(&(tcb->context), &(runQ->headPointer->context));
+			yield(); 
 		}else
 		{
 			sem->value--; 

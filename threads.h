@@ -11,15 +11,12 @@ void startThread(void (*function)(void), int id) {
 	void *stack = (void *) malloc(8192);	
 	init_TCB(temp, function, stack, 8192, id);	
 	addQueue(runQ, temp);	
-
-	return;
 }
 
 void run() {
 	ucontext_t parent;
 	getcontext(&parent);
 	swapcontext(&parent, &(runQ->headPointer->context));
-	return;
 }
 
 void yield() {
