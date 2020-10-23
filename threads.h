@@ -19,7 +19,7 @@ struct queue *runQ;
 //----------------------------//
 // Method Forward Declaration //
 //----------------------------//
-void startThread(void (*function)(void));
+void startThread(void (*function)(void), int id);
 void run();
 void yield();
 
