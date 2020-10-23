@@ -18,34 +18,51 @@ void initSem(semaphore *sem, int value) {
 
 void P(semaphore *sem, int id) 
 {
-	while(1) 
+	// while(1) 
+	// {
+	// 	if(sem->value <= 0)
+	// 	{
+	// 		if(id > 0)
+	// 		{
+	// 			printf("\n Producer %d is waiting \n", id); 
+	// 		}else
+	// 		{
+	// 			printf("\n Consumer %d is waiting \n", id); 
+	// 		}
+	// 		struct TCB_t *tcb = delQueue(runQ);
+	// 		addQueue(sem->semQ, tcb);
+	// 		swapcontext(&(tcb->context), &(runQ->headPointer->context));
+	// 	}else
+	// 	{
+	// 		sem->value--; 
+	// 		return; 
+	// 	}
+	// }
+	while(sem->value == 0)
 	{
-		if(sem->value <= 0)
+		if(id > 0)
 		{
-			if(id > 0)
-			{
-				printf("\n Producer %d is waiting \n", id); 
-			}else
-			{
-				printf("\n Consumer %d is waiting \n", id); 
-			}
-			struct TCB_t *tcb = delQueue(runQ);
-			addQueue(sem->semQ, tcb);
-			swapcontext(&(tcb->context), &(runQ->headPointer->context));
+			printf("\n Producer %d is waiting \n", id); 
 		}else
 		{
-			sem->value--; 
-			break; 
+			printf("\n Consumer %d is waiting \n", id); 
 		}
+		struct TCB_t *tcb = delQueue(runQ);
+		addQueue(sem->semQ, tcb);
+		if(runQ == NULL) exit(0); 
+		swapcontext(&(tcb->context), &(runQ->headPointer->context));
 	}
+	sem->value--; 
 }
 
 void V(semaphore *sem) 
 {
-	if(sem->semQ != NULL)
-	{
-		struct TCB_t *tcb = delQueue(sem->semQ);
-		addQueue(runQ, tcb);
-	}
-	sem->value++;
+	// if(sem->value <= 0 && sem->semQ != NULL)
+	// {
+	// 	struct TCB_t *tcb = delQueue(sem->semQ);
+	// 	addQueue(runQ, tcb);
+	// }
+	// sem->value++;
+	sem->value++; 
+	addQueue(runQ, delQueue(sem->semQ)); 
 }
