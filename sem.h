@@ -8,9 +8,7 @@ struct sem
 
 void InitSem(struct sem *semaphore, int thisValue)      //Initialize value field with specified value 
 {
-	semaphore = malloc(sizeof(struct sem)); 
     semaphore->val = thisValue; 
-	InitQueue(&(semaphore->q)); 
 }
 
 void P(struct sem *semaphore)
