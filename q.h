@@ -1,12 +1,9 @@
-#ifndef Q_H
-#define Q_H
-
 #include <stdlib.h>
 #include <unistd.h>
 #include "tcb.h"
 
 typedef struct queue {
-	struct TCB_t *header; // Pointer to 1st Element in Queue
+	struct TCB_t *headPointer; // Pointer to 1st Element in Queue
 } queue;
 
 void initQueue(struct queue*);	
@@ -16,27 +13,27 @@ struct TCB_t* delQueue(struct queue*);
 struct TCB_t* newItem();	
 
 void initQueue(struct queue *head) {
-	head->header = NULL;
+	head->headPointer = NULL;
 	return;
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
 	// Check for 0 elements in Queue
-	if (head->header != NULL) {
-		if (head->header->next != NULL) {
+	if (head->headPointer != NULL) {
+		if (head->headPointer->next != NULL) {
 
-			item->prev = head->header->prev;
-			item->next = head->header; 
-			head->header->prev->next = item; 
-			head->header->prev = item; 
+			item->prev = head->headPointer->prev;
+			item->next = head->headPointer; 
+			head->headPointer->prev->next = item; 
+			head->headPointer->prev = item; 
 		} else {
-			head->header->next = item; 
-			head->header->prev = item; 
-			item->next = head->header; 
-			item->prev = head->header; 
+			head->headPointer->next = item; 
+			head->headPointer->prev = item; 
+			item->next = head->headPointer; 
+			item->prev = head->headPointer; 
 		}
 	} else {
-		head->header = item; 
+		head->headPointer = item; 
 		item->prev = NULL; 
 		item->next = NULL; 
 	}
@@ -50,15 +47,15 @@ void rotQueue(struct queue *head) {
 }
 
 struct TCB_t* delQueue(struct queue *head) {
-	struct TCB_t *item = head->header;
+	struct TCB_t *item = head->headPointer;
 
-	if (head->header != NULL) {
-		if (head->header->next != NULL) {
-			head->header->prev->next = head->header->next;
-			head->header->next->prev = head->header->prev;
-			head->header = head->header->next;
+	if (head->headPointer != NULL) {
+		if (head->headPointer->next != NULL) {
+			head->headPointer->prev->next = head->headPointer->next;
+			head->headPointer->next->prev = head->headPointer->prev;
+			head->headPointer = head->headPointer->next;
 		} else {
-			head->header = NULL;
+			head->headPointer = NULL;
 		}
 	}
 	
@@ -76,4 +73,3 @@ struct TCB_t* newItem() {
 	return item;
 }
 
-#endif

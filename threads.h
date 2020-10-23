@@ -1,6 +1,3 @@
-#ifndef THREADS_H
-#define THREADS_H
-
 #include "q.h"
 
 struct queue *runQ;
@@ -19,37 +16,18 @@ void startThread(void (*function)(void), int id) {
 }
 
 void run() {
-	// Declare the context of the first TCB
 	ucontext_t parent;
-	
-	// Grab the original conext
 	getcontext(&parent);
-	
-	// Swap to the first TCB in Run Queue
-	swapcontext(&parent, &(runQ->header->context));
-
+	swapcontext(&parent, &(runQ->headPointer->context));
 	return;
 }
 
 void yield() {
-	// Declare the context of the threaded TCBs
 	ucontext_t from, to;
-	
-	// Grab the running processes context
 	getcontext(&from);
-	
-	// Update the context of the current process
-	runQ->header->context = from;
-	
-	// Move the process to the end of the Queue
+	runQ->headPointer->context = from;
 	rotQueue(runQ);
-	
-	// Grab the next process in the Run Queue
-	to = runQ->header->context;
-	
-	// Swap the currently running process to the next process in the Queue
+	to = runQ->headPointer->context;
 	swapcontext(&from, &to);
-	return;
 }
 
-#endif

@@ -1,11 +1,8 @@
-#ifndef SEM_H
-#define SEM_H
-
 #include "threads.h"
 
 typedef struct semaphore {
 	int value;	
-	struct queue *sleepQ;	
+	struct queue *semQ;	
 } semaphore;
 
 void initSem(semaphore*, int);
@@ -13,8 +10,8 @@ void P(semaphore*, int id);
 void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
-	sem->sleepQ = (struct queue*) malloc(sizeof(struct queue));
-	initQueue(sem->sleepQ);
+	sem->semQ = (struct queue*) malloc(sizeof(struct queue));
+	initQueue(sem->semQ);
 	sem->value = value;
 	return;
 }
@@ -33,8 +30,8 @@ void P(semaphore *sem, int id)
 				printf("\n Consumer %d is waiting \n", id); 
 			}
 			struct TCB_t *tcb = delQueue(runQ);
-			addQueue(sem->sleepQ, tcb);
-			swapcontext(&(tcb->context), &(runQ->header->context));
+			addQueue(sem->semQ, tcb);
+			swapcontext(&(tcb->context), &(runQ->headPointer->context));
 		}else
 		{
 			sem->value--; 
@@ -45,12 +42,10 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
-	if(sem->value <= 0 && sem->sleepQ != NULL)
+	if(sem->value <= 0 && sem->semQ != NULL)
 	{
-		struct TCB_t *tcb = delQueue(sem->sleepQ);
+		struct TCB_t *tcb = delQueue(sem->semQ);
 		addQueue(runQ, tcb);
 	}
 	sem->value++;
 }
-
-#endif

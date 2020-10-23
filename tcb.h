@@ -1,6 +1,3 @@
-#ifndef TCB_H
-#define TCB_H
-
 #include <ucontext.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,5 +18,3 @@ void init_TCB(TCB_t *tcb, void *function, void *stackP, int stack_size, int id) 
 	makecontext(&tcb->context, function, 2, id);
 	return;
 }
-
-#endif
