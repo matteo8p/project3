@@ -64,8 +64,8 @@ void producer(int id)
         V(full);
         i++; 
     }
-    TCB_t* t = delQueue(runQ); 
-    swapcontext(&(t->context), &(runQ->header->context));
+    // TCB_t* t = delQueue(runQ); 
+    // swapcontext(&(t->context), &(runQ->header->context));
 }
 
 void consumer(int id)
@@ -81,10 +81,9 @@ void consumer(int id)
 
         V(empty); 
         i++; 
-
     }
-    TCB_t* t = delQueue(runQ); 
-    swapcontext(&(t->context), &(runQ->header->context));
+    // TCB_t* t = delQueue(runQ); 
+    // swapcontext(&(t->context), &(runQ->header->context));
 }
 
 
