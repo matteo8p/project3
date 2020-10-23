@@ -56,13 +56,10 @@ void P(semaphore *sem) {
 	struct TCB_t *p; 
 
 	if (sem->value == 0) {
-		printf("Blocked"); 
+		printf("\n Blocked \n"); 
 		p = delQueue(runQ);
-		
-		// Block the process
 		addQueue(sem->sleepQ, p);
-		
-		yield(); 
+		swapcontext(&(p->context), &(runQ->header->context))
 	}else
 	{
 		sem->value--;
