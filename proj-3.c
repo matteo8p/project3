@@ -20,9 +20,6 @@ void consumer();
 
 int main()
 {   
-    full = (struct sem *)malloc(sizeof(struct sem)); 
-    empty = (struct sem *)malloc(sizeof(struct sem)); 
-
     InitSem(full, 0); 
     InitSem(empty, B_num); 
 
@@ -42,7 +39,8 @@ int main()
             start_thread(producer, newThread, id);
         }else                   //ID < 0, create consumer 
         {   
-            TCB_t *newThread = NewItem();                         
+            TCB_t *newThread = NewItem();   
+            id = -id;                       
             start_thread(consumer, newThread, id); 
         }
     }
