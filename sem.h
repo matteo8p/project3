@@ -49,13 +49,14 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
+	sem->value++;
 	if(sem->value <= 0)
 	{
 		struct TCB_t *t; 
 		t = delQueue(sem->sleepQ);
 		addQueue(runQ, t);
 	}
-	sem->value++;
+
 	yield(runQ);
 }
 
