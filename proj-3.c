@@ -64,6 +64,7 @@ void producer(int id)
         in = (in + 1) % B_num;
 
         V(full);
+        yield(); 
         i++; 
     }
     //yield(); 
@@ -81,7 +82,8 @@ void consumer(int id)
         out = (out + 1) % B_num; 
 
         V(empty); 
-        i++;
+        yield(); 
+        i++; 
     }
     //yield();
 }
