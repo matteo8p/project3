@@ -56,7 +56,7 @@ void P(semaphore *sem) {
 
 
 	// Check if the Semaphore value is zero or negative
-	if (sem->value < 0) {
+	if (sem->value <= 0) {
 		// Take the current process from the Run Queue
 		printf("\n Blocked \n");
 		t = delQueue(runQ);
@@ -70,8 +70,6 @@ void P(semaphore *sem) {
 	{
 		sem->value--;
 	}
-	
-
 	return;
 }
 
@@ -85,14 +83,11 @@ void V(semaphore *sem) {
 	// Increment the Semaphore Value
 	sem->value++;
 
-	// Check if the Semaphore value is positive
-	if (sem->value <= 0) {
-		// Take a process from the Semaphore's Sleep Queue
+
 		t = delQueue(sem->sleepQ);
 		
 		// Put the process in the Run Queue
 		addQueue(runQ, t);
-	}
 
 	// Call the next process to eliminate bounded waiting
 	yield();
