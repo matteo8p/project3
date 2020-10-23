@@ -14,11 +14,8 @@ void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
 	sem->sleepQ = (struct queue*) malloc(sizeof(struct queue));
-
 	initQueue(sem->sleepQ);
-
 	sem->value = value;
-
 	return;
 }
 
