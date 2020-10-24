@@ -63,7 +63,7 @@ void producer(int id)
         V(full);
         i++; 
     }
-    if(tcb == NULL) exit(0); 
+    if(runQ->headPointer == NULL) exit(0); 
 }
 
 void consumer(int id)
