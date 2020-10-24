@@ -21,7 +21,6 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 	// Check for 0 elements in Queue
 	if (head->headPointer != NULL) {
 		if (head->headPointer->next != NULL) {
-
 			item->prev = head->headPointer->prev;
 			item->next = head->headPointer; 
 			head->headPointer->prev->next = item; 
