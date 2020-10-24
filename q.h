@@ -21,8 +21,8 @@ void addQueue(struct queue* head, TCB_t* item) {
 	TCB_t* temp = head;
 	if (temp == NULL) {
 		head = item;	
-		(head)->next = *head;
-		(head)->prev = *head;
+		head->headPointer->next = head->headPointer;
+		head->headPointer->prev = head->headPointer;
 	} else if (temp->next == temp) {		
 		temp->next = item;
 		temp->prev = item;
@@ -34,7 +34,7 @@ void addQueue(struct queue* head, TCB_t* item) {
 		item->next = temp->next;
 		item->prev = temp;
 		temp->next = item;
-		(head)->prev = item;
+		head->headPointer->prev = item;
 	}
 }
 
@@ -46,7 +46,7 @@ void rotQueue(struct queue *head) {
 TCB_t* delQueue(struct queue* head) {
 	TCB_t* del = head;
 	if (del->next == del) {
-		head = NULL;
+		head->headPointer = NULL;
 	} else {
 		while (del->next != head) {
 			del = del->next;
