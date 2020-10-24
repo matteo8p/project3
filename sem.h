@@ -43,6 +43,6 @@ void V(semaphore *sem)
 {
 	sem->value++;
 	struct TCB_t *tcb = delQueue(sem->semQ);
-	addQueue(runQ, tcb);
+	if(tcb != NULL) addQueue(runQ, tcb);
 	yield(); 
 }
