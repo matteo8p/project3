@@ -26,7 +26,7 @@ void P(semaphore *sem, int id)
 				printf("\n Producer %d is waiting \n", id); 
 			}else
 			{
-				printf("\n Consumer %d is waiting \n", id); 
+				printf("\n Consumer %d is waiting \n", -id); 
 			}
 			struct TCB_t *tcb = delQueue(runQ);
 			addQueue(sem->semQ, tcb);
