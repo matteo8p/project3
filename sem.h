@@ -17,29 +17,32 @@ void initSem(semaphore *sem, int value) {
 
 void P(semaphore *sem, int id) 
 {
-	while(sem->value == 0)
+	while(1)
 	{
-		if(id > 0)
+		if(sem->value == 0)
 		{
-			printf("\n Producer %d is waiting \n", id); 
+			if(id > 0)
+			{
+				printf("\n Producer %d is waiting \n", id); 
+			}else
+			{
+				printf("\n Consumer %d is waiting \n", -id); 
+			}
+			struct TCB_t *tcb = delQueue(runQ);
+			addQueue(sem->semQ, tcb);
+			swapcontext(&(tcb->context), &(runQ->headPointer->context));
 		}else
 		{
-			printf("\n Consumer %d is waiting \n", -id); 
+			sem->value--; 
+			return; 
 		}
-		struct TCB_t *tcb = delQueue(runQ);
-		addQueue(sem->semQ, tcb);
-		swapcontext(&(tcb->context), &(runQ->headPointer->context));
 	}
-	sem->value--; 
 }
 
 void V(semaphore *sem) 
 {
-	if(sem->value <= 0 && sem->semQ->headPointer != NULL)
-	{
-		struct TCB_t *tcb = delQueue(sem->semQ);
-		addQueue(runQ, tcb);
-	}
 	sem->value++;
+	struct TCB_t *tcb = delQueue(sem->semQ);
+	addQueue(runQ, tcb);
 	yield(); 
 }
