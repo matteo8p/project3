@@ -63,11 +63,7 @@ void producer(int id)
         V(full);
         i++; 
     }
-    TCB_t *tcb = delQueue(runQ); 
-    if(tcb == NULL)
-    {
-        exit(0); 
-    }
+
     yield(); 
 }
 
