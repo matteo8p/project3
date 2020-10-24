@@ -43,7 +43,7 @@ void V(semaphore *sem)
 {
 	if(sem->value == 0 && sem->semQ->headPointer != NULL)
 	{
-		struct TCB_t *tcb = delQueue(sem->semQ->headPointer);
+		struct TCB_t *tcb = delQueue(sem->semQ);
 		addQueue(runQ, tcb);
 	}
 	sem->value++;
