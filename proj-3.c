@@ -62,6 +62,7 @@ void producer(int id)
         in = (in + 1) % B_num;
 
         V(full);
+        printf("VFull done");
         i++; 
     }
 }
