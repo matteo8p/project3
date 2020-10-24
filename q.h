@@ -17,25 +17,30 @@ void initQueue(struct queue *head) {
 	return;
 }
 
-void addQueue(struct queue* head, TCB_t* item) {
-	TCB_t* temp = head->headPointer;
-	if (temp == NULL) {
-		head->headPointer = item;	
-		head->headPointer->next = head->headPointer;
-		head->headPointer->prev = head->headPointer;
-	} else if (temp->next == temp) {		
-		temp->next = item;
-		temp->prev = item;
-		item->next = temp;
-		item->prev = temp;
+void addQueue(struct queue *head, struct TCB_t *item) {
+	// Check for 0 elements in Queue
+	if (head->headPointer != NULL) {
+		if (head->headPointer->next != NULL) {
+			// Queue is not empty, break chain and insert new item to end
+			item->prev = head->headPointer->prev; // Add new link at end of chain
+			item->next = head->headPointer; // Attach new link to beginning of chain
+			head->headPointer->prev->next = item; // Make link from last element
+			head->headPointer->prev = item; // Make link to end from head
+		} else {
+			// Queue has 1 element so create new chain
+			head->headPointer->next = item; // Add new link to new item
+			head->headPointer->prev = item; // Create chain linking to last element
+			item->next = head->headPointer; // Create chain linking to first element
+			item->prev = head->headPointer; // Add new link to old item
+		}
 	} else {
-		while (temp->next != head->headPointer)
-			temp = temp->next;
-		item->next = temp->next;
-		item->prev = temp;
-		temp->next = item;
-		head->headPointer->prev = item;
+		// Queue is empty
+		head->headPointer = item; // Make header point to new item
+		item->prev = NULL; // Make pointer to NULL
+		item->next = NULL; // Make pointer to NULL
 	}
+	
+	return;
 }
 
 void rotQueue(struct queue *head) {
@@ -43,18 +48,28 @@ void rotQueue(struct queue *head) {
 	return;
 }
 
-TCB_t* delQueue(struct queue* head) {
-	TCB_t* del = head->headPointer;
-	if (del->next == del) {
-		head->headPointer = NULL;
-	} else {
-		while (del->next != head->headPointer) {
-			del = del->next;
+struct TCB_t* delQueue(struct queue *head) {
+	// Grab the first element in the Queue
+	struct TCB_t *item = head->headPointer;
+
+	// Check for empty Queue
+	if (head->headPointer != NULL) {
+		// Check for single or multiple elements in Queue
+		if (head->headPointer->next != NULL) {
+			// Grab the last element and next element
+			// Assign next and prev to recreate chain
+			head->headPointer->prev->next = head->headPointer->next;
+			head->headPointer->next->prev = head->headPointer->prev;
+
+			// Set the Queue header to next
+			head->headPointer = head->headPointer->next;
+		} else {
+			// Remove single element from Queue
+			head->headPointer = NULL;
 		}
-		del->prev->next = del->next;
-		del->next->prev = del->prev;
 	}
-	return del;
+	
+	return item;
 }
 
 struct TCB_t* newItem() {
