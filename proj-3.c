@@ -68,7 +68,7 @@ void producer(int id)
     {
         exit(0); 
     }
-    yield(); 
+     swapcontext(&(tcb->context), &(runQ->headPointer->context));
 }
 
 void consumer(int id)
@@ -90,7 +90,7 @@ void consumer(int id)
     {
         exit(0); 
     }
-    yield(); 
+    swapcontext(&(tcb->context), &(runQ->headPointer->context));
 }
 
 
