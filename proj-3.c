@@ -64,6 +64,7 @@ void producer(int id)
         V(full);
         i++; 
     }
+    yield(); 
 }
 
 void consumer(int id)
@@ -80,6 +81,7 @@ void consumer(int id)
         V(empty); 
         i++; 
     }
+    yield(); 
 }
 
 
