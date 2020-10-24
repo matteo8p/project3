@@ -41,7 +41,6 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
-	printf("V");
 	if(sem->value == 0 && sem->semQ != NULL)
 	{
 		struct TCB_t *tcb = delQueue(sem->semQ);
