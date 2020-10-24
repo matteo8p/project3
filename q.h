@@ -48,7 +48,7 @@ TCB_t* delQueue(struct queue* head) {
 	if (del->next == del) {
 		head->headPointer = NULL;
 	} else {
-		while (del->next != head) {
+		while (del->next != head->headPointer) {
 			del = del->next;
 		}
 		del->prev->next = del->next;
