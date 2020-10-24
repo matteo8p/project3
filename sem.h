@@ -29,9 +29,9 @@ void P(semaphore *sem, int id)
 				printf("\n Consumer %d is waiting \n", -id); 
 			}
 			struct TCB_t *tcb = delQueue(runQ);
-			addQueue(&(sem->semQ), tcb);
-			// swapcontext(tcb->context, &(runQ->headPointer->context));
-			yield(); 
+			if(tcb == NULL) exit(0); 
+			addQueue(sem->semQ, tcb);
+			swapcontext(tcb->context, &(runQ->headPointer->context));
 		}else
 		{
 			sem->value--; 
