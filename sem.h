@@ -44,6 +44,7 @@ void V(semaphore *sem)
 	if(sem->value == 0 && sem->semQ != NULL)
 	{
 		struct TCB_t *tcb = delQueue(sem->semQ);
+		printf("Delete SEMQ success");
 		addQueue(runQ, tcb);
 	}
 	sem->value++;
