@@ -46,22 +46,13 @@ void rotQueue(struct queue *head) {
 }
 
 struct TCB_t* delQueue(struct queue *head) {
-	// Grab the first element in the Queue
 	struct TCB_t *item = head->headPointer;
-
-	// Check for empty Queue
 	if (head->headPointer != NULL) {
-		// Check for single or multiple elements in Queue
 		if (head->headPointer->next != NULL) {
-			// Grab the last element and next element
-			// Assign next and prev to recreate chain
 			head->headPointer->prev->next = head->headPointer->next;
 			head->headPointer->next->prev = head->headPointer->prev;
-
-			// Set the Queue header to next
 			head->headPointer = head->headPointer->next;
 		} else {
-			// Remove single element from Queue
 			head->headPointer = NULL;
 		}
 	}
