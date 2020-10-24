@@ -17,27 +17,25 @@ void initQueue(struct queue *head) {
 	return;
 }
 
-void addQueue(struct queue *head, struct TCB_t *item) {
-	// Check for 0 elements in Queue
-	if (head->headPointer != NULL) {
-		if (head->headPointer->next != NULL) {
-			item->prev = head->headPointer->prev;
-			item->next = head->headPointer; 
-			head->headPointer->prev->next = item; 
-			head->headPointer->prev = item; 
-		} else {
-			head->headPointer->next = item; 
-			head->headPointer->prev = item; 
-			item->next = head->headPointer; 
-			item->prev = head->headPointer; 
-		}
+void addQueue(struct queue* head, TCB_t* item) {
+	TCB_t* temp = head;
+	if (temp == NULL) {
+		head = item;	
+		(head)->next = *head;
+		(head)->prev = *head;
+	} else if (temp->next == temp) {		
+		temp->next = item;
+		temp->prev = item;
+		item->next = temp;
+		item->prev = temp;
 	} else {
-		head->headPointer = item; 
-		item->prev = item; 
-		item->next = item; 
+		while (temp->next != head)
+			temp = temp->next;
+		item->next = temp->next;
+		item->prev = temp;
+		temp->next = item;
+		(head)->prev = item;
 	}
-	
-	return;
 }
 
 void rotQueue(struct queue *head) {
@@ -45,20 +43,18 @@ void rotQueue(struct queue *head) {
 	return;
 }
 
-struct TCB_t* delQueue(struct queue *head) {
-	struct TCB_t *item = head->headPointer;
-
-	if (head->headPointer != NULL) {
-		if (head->headPointer->next != NULL) {
-			head->headPointer->prev->next = head->headPointer->next;
-			head->headPointer->next->prev = head->headPointer->prev;
-			head->headPointer = head->headPointer->next;
-		} else {
-			head->headPointer = NULL;
+TCB_t* delQueue(struct queue* head) {
+	TCB_t* del = head;
+	if (del->next == del) {
+		head = NULL;
+	} else {
+		while (del->next != head) {
+			del = del->next;
 		}
+		del->prev->next = del->next;
+		del->next->prev = del->prev;
 	}
-	
-	return item;
+	return del;
 }
 
 struct TCB_t* newItem() {
