@@ -18,24 +18,23 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-	// if(item == NULL) return; 
-
-	if (head->headPointer != NULL) {
-		if (head->headPointer->next != NULL) {
-			item->prev = head->headPointer->prev; 
-			item->next = head->headPointer; 
-			head->headPointer->prev->next = item; 
-			head->headPointer->prev = item; 
-		} else {
-			head->headPointer->next = item; 
-			head->headPointer->prev = item; 
-			item->next = head->headPointer; 
-			item->prev = head->headPointer; 
-		}
+	struct queue *temp = head;
+	if (temp->headPointer == NULL) {
+		head->headPointer = item;
+		(head)->headPointer->next = head->headPointer;
+		(head)->headPointer->prev = head->headPointer;
+	} else if (temp->headPointer->next == temp) {
+		temp->headPointer->next = item;
+		temp->headPointer->prev = item;
+		item->next = temp;
+		item->prev = temp;
 	} else {
-		head->headPointer = item; 
-		item->prev = item; 
-		item->next = item; 
+		while (temp->headPointer->next != head->headPointer)
+			temp->headPointer = temp->headPointer->next;
+		item->next = temp->headPointer->next;
+		item->prev = temp->headPointer;
+		temp->headPointer->next = item;
+		(head)->headPointer->prev = item;
 	}
 	return;
 }
