@@ -34,8 +34,8 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 		}
 	} else {
 		head->headPointer = item; 
-		item->prev = NULL; 
-		item->next = NULL; 
+		item->prev = item; 
+		item->next = item; 
 	}
 	return;
 }
@@ -70,23 +70,5 @@ struct TCB_t* newItem() {
 	}
 
 	return item;
-}
-
-void printQueue(struct TCB_t *head)
-{
-	if (head == NULL) {
-		puts("queue head is null");
-		return;
-	}
-
-	if (head->next == head) {
-		printf("\t%p\n", head);
-	} else {
-		struct TCB_t *current = head;
-		do {
-			printf("\t%p\n", current);
-			current = current->next;
-		} while (current != head);
-	}
 }
 
