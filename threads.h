@@ -5,7 +5,7 @@
 
 #include "q.h"
 
-extern struct TCB_t *runQ;
+struct TCB_t *runQ;
 
 void startThread(void (*function)(void), int id)
 {
