@@ -25,7 +25,7 @@ int main()
     empty = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     runQ = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
 
-    initQueue(runQ); 
+    initQueue(&runQ); 
     initSem(full, 0); 
     initSem(empty, B_num); 
 
