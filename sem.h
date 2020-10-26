@@ -51,5 +51,5 @@ void V(semaphore *sem)
 		addQueue(runQ, tcb);
 	}
 	sem->value++;
-	yield(); 
+	yield(runQ->headPointer); 
 }
