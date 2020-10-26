@@ -3,7 +3,7 @@
 
 #include "tcb.h"
 
-void newQueue(struct TCB_t **head)
+void initQueue(struct TCB_t **head)
 {
 	*head = NULL;
 }
