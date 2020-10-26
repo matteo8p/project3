@@ -18,6 +18,7 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
+	// if(item == NULL) return; 
 
 	if (head->headPointer != NULL) {
 		if (head->headPointer->next != NULL) {

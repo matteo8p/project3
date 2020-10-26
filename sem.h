@@ -19,7 +19,7 @@ void P(semaphore *sem, int id)
 {
 	while(1)
 	{
-		if(sem->value <= 0)
+		if(sem->value == 0)
 		{
 			if(id > 0)
 			{
@@ -42,7 +42,7 @@ void P(semaphore *sem, int id)
 void V(semaphore *sem) 
 {
 	sem->value++;
-	if(sem->value <= 0 && sem->semQ->headPointer != NULL)
+	if(sem->semQ->headPointer != NULL)
 	{
 		struct TCB_t *tcb = delQueue(sem->semQ);
 		addQueue(runQ, tcb);
