@@ -46,15 +46,16 @@ void rotQueue(struct queue *head) {
 }
 
 struct TCB_t* delQueue(struct queue *head) {
-	if(head->headPointer == NULL) return NULL; 
-
 	struct TCB_t *item = head->headPointer;
-
-	head->headPointer = head->headPointer->next; 
-	head->headPointer->prev = head->headPointer->prev->prev; 
-	head->headPointer->prev->next = head->headPointer; 
-	item->next = NULL; 
-	item->prev = NULL; 
+	if (item->next == item) {
+		head = NULL;
+	} else {
+		while (item->next != head) {
+			item = item->next;
+		}
+		item->prev->next = item->next;
+		item->next->prev = item->prev;
+	}
 	return item;
 }
 
