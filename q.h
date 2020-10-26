@@ -23,7 +23,7 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 		head->headPointer = item;
 		(head)->headPointer->next = head->headPointer;
 		(head)->headPointer->prev = head->headPointer;
-	} else if (temp->headPointer->next == temp) {
+	} else if (temp->headPointer->next == temp->headPointer) {
 		temp->headPointer->next = item;
 		temp->headPointer->prev = item;
 		item->next = temp->headPointer;
