@@ -10,7 +10,7 @@ void P(semaphore*, int id);
 void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
-	sem->semQ = (struct queue*) malloc(sizeof(struct queue));
+	sem->semQ = (struct TCB_t*) malloc(sizeof(struct TCB_t));
 	initQueue(sem->semQ);
 	sem->value = value;
 }
@@ -30,11 +30,7 @@ void P(semaphore *sem, int id)
 			}
 			struct TCB_t *tcb = delQueue(runQ);
 			addQueue(sem->semQ, tcb);
-			if(runQ->headPointer == NULL || runQ == NULL) 
-			{
-				exit(0); 
-			}
-			swapcontext(&(tcb->context), &(runQ->headPointer->context));
+			swapcontext(&(tcb->context), &(runQ->context));
 		}else
 		{
 			sem->value--; 
@@ -45,11 +41,11 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
-	if(sem->value == 0 && sem->semQ->headPointer != NULL)
+	if(sem->semQ != NULL)
 	{
 		struct TCB_t *tcb = delQueue(sem->semQ);
 		addQueue(runQ, tcb);
 	}
 	sem->value++;
-	yield(runQ->headPointer); 
+	yield(); 
 }

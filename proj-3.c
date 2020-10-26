@@ -23,7 +23,7 @@ int main()
 
     full = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     empty = (struct semaphore *)malloc(sizeof(struct semaphore)); 
-    runQ = (struct queue*)malloc(sizeof(struct queue)); 
+    runQ = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
 
     initQueue(runQ); 
     initSem(full, 0); 
@@ -63,9 +63,6 @@ void producer(int id)
         V(full);
         i++; 
     }
-    TCB_t* deletedQ = delQueue(runQ); 
-    if(runQ->headPointer == NULL) exit(0); 
-    swapcontext(&(deletedQ->context), &(runQ->headPointer->context));
 }
 
 void consumer(int id)
@@ -82,9 +79,6 @@ void consumer(int id)
         V(empty); 
         i++; 
     }
-    TCB_t* deletedQ = delQueue(runQ); 
-    if(runQ->headPointer == NULL) exit(0); 
-    swapcontext(&(deletedQ->context), &(runQ->headPointer->context));
 }
 
 
