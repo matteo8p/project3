@@ -1,33 +1,30 @@
 #include "q.h"
 
-#ifndef THREADS_H
-#define THREADS_H
+struct queue *runQ;
 
-#include "q.h"
+void startThread(void (*function)(void), int id);
+void run();
+void yield();
 
-extern struct TCB_t *runQ;
-
-void startThread(void (*function)(void), int id)
-{
+void startThread(void (*function)(void), int id) {
 	TCB_t *temp = newItem();	
 	void *stack = (void *) malloc(8192);	
 	init_TCB(temp, function, stack, 8192, id);	
 	addQueue(runQ, temp);	
 }
 
-void run()
-{
+void run() {
 	ucontext_t parent;
 	getcontext(&parent);
-	swapcontext(&parent, &(runQ->context));
+	swapcontext(&parent, &(runQ->headPointer->context));
 }
 
-void yield()
-{
-	struct TCB_t *temp = runQ;
-	rotateQueue(&runQ);
-	swapcontext(&(temp->context), &(runQ->context));
+void yield() {
+	ucontext_t from, to;
+	getcontext(&from);
+	runQ->headPointer->context = from;
+	rotQueue(runQ);
+	to = runQ->headPointer->context;
+	swapcontext(&from, &to);
 }
-
-#endif
 
