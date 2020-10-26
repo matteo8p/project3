@@ -41,11 +41,12 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
-	if(sem->semQ != NULL)
+	sem->value++;
+	if(sem->semQ->headPointer != NULL)
 	{
 		struct TCB_t *tcb = delQueue(sem->semQ);
 		addQueue(runQ, tcb);
 	}
-	sem->value++;
+
 	yield(); 
 }
