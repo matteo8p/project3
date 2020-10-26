@@ -11,7 +11,7 @@ void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
 	sem->semQ = (struct TCB_t*) malloc(sizeof(struct TCB_t));
-	initQueue(sem->semQ);
+	initQueue(&(sem->semQ));
 	sem->value = value;
 }
 
@@ -28,8 +28,8 @@ void P(semaphore *sem, int id)
 			{
 				printf("\n Consumer %d is waiting \n", -id); 
 			}
-			struct TCB_t *tcb = delQueue(runQ);
-			addQueue(sem->semQ, tcb);
+			struct TCB_t *tcb = delQueue(&runQ);
+			addQueue(&(sem->semQ), tcb);
 			swapcontext(&(tcb->context), &(runQ->context));
 		}else
 		{
@@ -44,8 +44,8 @@ void V(semaphore *sem)
 	sem->value++;
 	if(sem->semQ != NULL)
 	{
-		struct TCB_t *tcb = delQueue(sem->semQ);
-		addQueue(runQ, tcb);
+		struct TCB_t *tcb = delQueue(&sem->semQ);
+		addQueue(&runQ, tcb);
 	}
 
 	yield(); 
