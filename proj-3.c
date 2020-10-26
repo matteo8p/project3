@@ -44,7 +44,7 @@ int main()
             startThread(consumer, id); 
         }
     }
-    printQueue(runQ->headPointer); 
+    //printQueue(runQ->headPointer); 
     run(); 
     return 0; 
 }
