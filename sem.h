@@ -10,7 +10,7 @@ void P(semaphore*, int id);
 void V(semaphore*);
 
 void initSem(semaphore *sem, int value) {
-	sem->semQ = (struct TCB_t*) malloc(sizeof(struct TCB_t));
+	sem->semQ = (struct queue*) malloc(sizeof(struct queue));
 	initQueue(sem->semQ);
 	sem->value = value;
 }
