@@ -54,13 +54,12 @@ void producer(int id)
     int i = 0; 
     while(i < N_num) 
     {
-        printQueue(runQ->headPointer); 
         P(empty, id);
 
         printf("\n Producer %d is producing item number %d\n", id, i + 1); 
         Buffer[in] = id; 
         in = (in + 1) % B_num;
-
+        printQueue(runQ->headPointer); 
         V(full);
         i++; 
     }
@@ -78,7 +77,7 @@ void consumer(int id)
 
         Buffer[out] = 0; 
         out = (out + 1) % B_num; 
-
+        printQueue(runQ->headPointer); 
         V(empty); 
         i++; 
     }
