@@ -1,6 +1,6 @@
 #include "q.h"
 
-struct queue *runQ;
+struct TCB_t *runQ;
 
 void startThread(void (*function)(void), int id);
 void run();
@@ -16,15 +16,15 @@ void startThread(void (*function)(void), int id) {
 void run() {
 	ucontext_t parent;
 	getcontext(&parent);
-	swapcontext(&parent, &(runQ->headPointer->context));
+	swapcontext(&parent, &(runQ->context));
 }
 
 void yield() {
 	ucontext_t from, to;
 	getcontext(&from);
-	runQ->headPointer->context = from;
+	runQ->context = from;
 	rotQueue(runQ);
-	to = runQ->headPointer->context;
+	to = runQ->context;
 	swapcontext(&from, &to);
 }
 

@@ -2,58 +2,54 @@
 #include <unistd.h>
 #include "tcb.h"
 
-typedef struct queue {
-	struct TCB_t *headPointer; // Pointer to 1st Element in Queue
-} queue;
-
-void initQueue(struct queue*);	
-void addQueue(struct queue*, struct TCB_t*);	
-void rotateQ(struct queue*);	
-struct TCB_t* delQueue(struct queue*);	
+void initQueue(struct TCB_t*);	
+void addQueue(struct TCB_t*, struct TCB_t*);	
+void rotateQ(struct TCB_t*);	
+struct TCB_t* delQueue(struct TCB_t*);	
 struct TCB_t* newItem();	
 
-void initQueue(struct queue *head) {
-	head->headPointer = NULL;
+void initQueue(struct TCB_t *head) {
+	head = NULL;
 	return;
 }
 
-void addQueue(struct queue *head, struct TCB_t *item) {
+void addQueue(struct TCB_t *head, struct TCB_t *item) {
 	// if(item == NULL) return; 
 
-	if (head->headPointer != NULL) {
-		if (head->headPointer->next != NULL) {
-			item->prev = head->headPointer->prev; 
-			item->next = head->headPointer; 
-			head->headPointer->prev->next = item; 
-			head->headPointer->prev = item; 
+	if (head != NULL) {
+		if (head->next != NULL) {
+			item->prev = head->prev; 
+			item->next = head; 
+			head->prev->next = item; 
+			head->prev = item; 
 		} else {
-			head->headPointer->next = item; 
-			head->headPointer->prev = item; 
-			item->next = head->headPointer; 
-			item->prev = head->headPointer; 
+			head->next = item; 
+			head->prev = item; 
+			item->next = head; 
+			item->prev = head; 
 		}
 	} else {
-		head->headPointer = item; 
+		head= item; 
 		item->prev = NULL; 
 		item->next = NULL; 
 	}
 	return;
 }
 
-void rotQueue(struct queue *head) {
+void rotQueue(struct TCB_t *head) {
 	addQueue(head, delQueue(head));
 	return;
 }
 
-struct TCB_t* delQueue(struct queue *head) {
-	struct TCB_t *item = head->headPointer;
-	if (head->headPointer != NULL) {
-		if (head->headPointer->next != NULL) {
-			head->headPointer->prev->next = head->headPointer->next;
-			head->headPointer->next->prev = head->headPointer->prev;
-			head->headPointer = head->headPointer->next;
+struct TCB_t* delQueue(struct TCB_t *head) {
+	struct TCB_t *item = head;
+	if (head != NULL) {
+		if (head->next != NULL) {
+			head->prev->next = head->next;
+			head->next->prev = head->prev;
+			head = head->next;
 		} else {
-			head->headPointer = NULL;
+			head = NULL;
 		}
 	}
 	
