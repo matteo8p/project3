@@ -23,9 +23,9 @@ int main()
 
     full = (struct semaphore *)malloc(sizeof(struct semaphore)); 
     empty = (struct semaphore *)malloc(sizeof(struct semaphore)); 
-    runQ = (struct TCB_t*)malloc(sizeof(struct TCB_t)); 
+    runQ = (struct queue*)malloc(sizeof(struct queue)); 
 
-    initQueue(&runQ); 
+    initQueue(runQ); 
     initSem(full, 0); 
     initSem(empty, B_num); 
 
@@ -44,6 +44,7 @@ int main()
             startThread(consumer, id); 
         }
     }
+
     run(); 
     return 0; 
 }
@@ -62,6 +63,7 @@ void producer(int id)
         V(full);
         i++; 
     }
+    if(runQ->headPointer == NULL) exit(0); 
 }
 
 void consumer(int id)
@@ -78,6 +80,7 @@ void consumer(int id)
         V(empty); 
         i++; 
     }
+    if(runQ->headPointer == NULL) exit(0); 
 }
 
 

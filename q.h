@@ -1,89 +1,73 @@
-#ifndef Q_H
-#define Q_H
-
+#include <stdlib.h>
+#include <unistd.h>
 #include "tcb.h"
 
-void initQueue(struct TCB_t **head)
-{
-	*head = NULL;
+typedef struct queue {
+	struct TCB_t *headPointer; // Pointer to 1st Element in Queue
+} queue;
+
+void initQueue(struct queue*);	
+void addQueue(struct queue*, struct TCB_t*);	
+void rotateQ(struct queue*);	
+struct TCB_t* delQueue(struct queue*);	
+struct TCB_t* newItem();	
+
+void initQueue(struct queue *head) {
+	head->headPointer = NULL;
+	return;
 }
 
-struct TCB_t *newItem()
-{
-	return (struct TCB_t *)malloc(sizeof(struct TCB_t));
-}
+void addQueue(struct queue *head, struct TCB_t *item) {
+	// if(item == NULL) return; 
 
-void addQueue(struct TCB_t **head, struct TCB_t *item)
-{
-	struct TCB_t *temp = *head;
-	if (temp == NULL) {
-		*head = item;
-		(*head)->next = *head;
-		(*head)->prev = *head;
-	} else if (temp->next == temp) {
-		temp->next = item;
-		temp->prev = item;
-		item->next = temp;
-		item->prev = temp;
-	} else {
-		while (temp->next != *head)
-			temp = temp->next;
-		item->next = temp->next;
-		item->prev = temp;
-		temp->next = item;
-		(*head)->prev = item;
-	}
-}
-
-struct TCB_t *delQueue(struct TCB_t **head)
-{
-	struct TCB_t *item = *head;
-	if (item->next == item) {
-		*head = NULL;
-	} else {
-		while (item->next != *head) {
-			item = item->next;
+	if (head->headPointer != NULL) {
+		if (head->headPointer->next != NULL) {
+			item->prev = head->headPointer->prev; 
+			item->next = head->headPointer; 
+			head->headPointer->prev->next = item; 
+			head->headPointer->prev = item; 
+		} else {
+			head->headPointer->next = item; 
+			head->headPointer->prev = item; 
+			item->next = head->headPointer; 
+			item->prev = head->headPointer; 
 		}
-		item->prev->next = item->next;
-		item->next->prev = item->prev;
+	} else {
+		head->headPointer = item; 
+		item->prev = NULL; 
+		item->next = NULL; 
+	}
+	return;
+}
+
+void rotQueue(struct queue *head) {
+	addQueue(head, delQueue(head));
+	return;
+}
+
+struct TCB_t* delQueue(struct queue *head) {
+	struct TCB_t *item = head->headPointer;
+	if (head->headPointer != NULL) {
+		if (head->headPointer->next != NULL) {
+			head->headPointer->prev->next = head->headPointer->next;
+			head->headPointer->next->prev = head->headPointer->prev;
+			head->headPointer = head->headPointer->next;
+		} else {
+			head->headPointer = NULL;
+		}
+	}
+	
+	return item;
+}
+
+struct TCB_t* newItem() {
+	struct TCB_t *item = (struct TCB_t*) malloc(sizeof(struct TCB_t));
+	
+	if (!item) {
+		item->prev = NULL;
+		item->next = NULL;
 	}
 
 	return item;
 }
-
-struct TCB_t *rotateQueue(struct TCB_t **head)
-{
-	struct TCB_t *temp = NULL;
-	if (head != NULL) {
-		temp = *head;
-		*head = temp->next;
-	}
-
-	return temp;
-}
-
-void freeItem(void *item)
-{
-	free(item);
-}
-
-void printQueue(struct TCB_t *head)
-{
-	if (head == NULL) {
-		puts("queue head is null");
-		return;
-	}
-
-	if (head->next == head) {
-		printf("\t%p\n", head);
-	} else {
-		struct TCB_t *current = head;
-		do {
-			printf("\t%p\n", current);
-			current = current->next;
-		} while (current != head);
-	}
-}
-
-#endif
 
