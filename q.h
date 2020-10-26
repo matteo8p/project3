@@ -50,9 +50,7 @@ struct TCB_t* delQueue(struct queue *head) {
 	if (item->next == item) {
 		head = NULL;
 	} else {
-		while (item->next != head) {
-			item = item->next;
-		}
+		item = item->prev; 
 		item->prev->next = item->next;
 		item->next->prev = item->prev;
 	}
