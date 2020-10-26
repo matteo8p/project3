@@ -1,6 +1,3 @@
-#ifndef TCB_H
-#define TCB_H
-
 #include <ucontext.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,7 +11,7 @@ struct TCB_t {
      ucontext_t context;
 };
 
-void init_TCB(TCB_t *tcb, void *function, void *stack, int stack_size, int id) {
+void startThread(TCB_t *tcb, void *function, void *stack, int stack_size, int id) {
 	memset(tcb, '\0', sizeof(TCB_t));      
 	getcontext(&tcb->context);              
 	tcb->context.uc_stack.ss_sp = stack;
