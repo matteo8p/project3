@@ -18,10 +18,8 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-	// Check for 0 elements in Queue
 	if (head->headPointer != NULL) {
 		if (head->headPointer != NULL) {
-			// Queue is not empty, break chain and insert new item to end
 			item->prev = head->headPointer->prev; // Add new link at end of chain
 			item->next = head->headPointer; // Attach new link to beginning of chain
 			head->headPointer->prev->next = item; // Make link from last element
@@ -34,10 +32,9 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 			item->prev = head->headPointer; // Add new link to old item
 		}
 	} else {
-		// Queue is empty
 		head->headPointer = item; // Make header point to new item
-		item->prev = NULL; // Make pointer to NULL
-		item->next = NULL; // Make pointer to NULL
+		item->prev = item; // Make pointer to NULL
+		item->next = item; // Make pointer to NULL
 	}
 	
 	return;
