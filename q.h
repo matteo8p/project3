@@ -54,7 +54,6 @@ struct TCB_t* delQueue(struct queue *head) {
 			head->headPointer = NULL;
 		}
 	}
-	
 	return item;
 }
 
