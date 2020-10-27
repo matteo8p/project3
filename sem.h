@@ -46,6 +46,5 @@ void V(semaphore *sem)
 		addQueue(runQ, delQueue(sem->semQ));
 	}
 	sem->value++;
-	printf("Yield V");
 	yield(); 
 }
