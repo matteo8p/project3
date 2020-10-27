@@ -4,17 +4,10 @@
 
 typedef struct queue {
 	struct TCB_t *headPointer; // Pointer to 1st Element in Queue
-} queue;
-
-void initQueue(struct queue*);	
-void addQueue(struct queue*, struct TCB_t*);	
-void rotateQ(struct queue*);	
-struct TCB_t* delQueue(struct queue*);	
-struct TCB_t* newItem();	
+} queue;	
 
 void initQueue(struct queue *head) {
 	head->headPointer = NULL;
-	return;
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
@@ -37,7 +30,6 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 
 void rotQueue(struct queue *head) {
 	addQueue(head, delQueue(head));
-	return;
 }
 
 struct TCB_t* delQueue(struct queue *head) {
