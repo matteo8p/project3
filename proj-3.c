@@ -63,7 +63,7 @@ void producer(int id)
         V(full);
         i++; 
     }
-    if(runQ->headPointer == NULL) exit(0); 
+    // if(runQ->headPointer == NULL) exit(0); 
     yield(); 
 }
 
@@ -81,7 +81,7 @@ void consumer(int id)
         V(empty); 
         i++; 
     }
-    if(runQ->headPointer == NULL) exit(0); 
+    // if(runQ->headPointer == NULL) exit(0); 
     yield(); 
 }
 
