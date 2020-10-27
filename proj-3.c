@@ -82,8 +82,6 @@ void consumer(int id)
         i++; 
     }
     if(runQ->headPointer == NULL) exit(0); 
-    struct TCB_t *tcb = delQueue(runQ); 
-    swapcontext(&(tcb->context), &(runQ->headPointer->context));
     yield(); 
 }
 
