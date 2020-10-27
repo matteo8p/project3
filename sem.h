@@ -34,7 +34,7 @@ void P(semaphore *sem, int id)
 			{
 				exit(0); 
 			}
-			swapcontext(&(sem->semQ->headPointer->prev), &(runQ->headPointer->context));
+			swapcontext(&(sem->semQ->headPointer->prev->context), &(runQ->headPointer->context));
 		}else
 		{
 			sem->value--; 
