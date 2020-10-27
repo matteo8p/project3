@@ -10,7 +10,7 @@ void initQueue(struct queue*);
 void addQueue(struct queue*, struct TCB_t*);	
 void rotateQ(struct queue*);	
 struct TCB_t* delQueue(struct queue*);	
-struct queue* newItem();	
+struct TCB_t* newItem();	
 
 void initQueue(struct queue *head) {
 	head->headPointer = NULL;
@@ -23,7 +23,12 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 		head->headPointer = item;	
 		head->headPointer->next = head->headPointer;
 		head->headPointer->prev = head->headPointer;
-	}else {
+	} else if (temp->next == temp) {		
+		temp->next = item;
+		temp->prev = item;
+		item->next = temp;
+		item->prev = temp;
+	} else {
 		while (temp->next != head->headPointer)
 			temp = temp->next;
 		item->next = head->headPointer;
@@ -52,8 +57,8 @@ struct TCB_t* delQueue(struct queue *head) {
 	return item;
 }
 
-struct queue* newItem() {
-	struct queue *item = (struct queue*) malloc(sizeof(struct queue));
+struct TCB_t* newItem() {
+	struct TCB_t *item = (struct TCB_t*) malloc(sizeof(struct TCB_t));
 	return item;
 }
 
