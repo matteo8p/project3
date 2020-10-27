@@ -18,26 +18,24 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-	if (head->headPointer != NULL) {
-		if (head->headPointer != NULL) {
-			item->prev = head->headPointer->prev; // Add new link at end of chain
-			item->next = head->headPointer; // Attach new link to beginning of chain
-			head->headPointer->prev->next = item; // Make link from last element
-			head->headPointer->prev = item; // Make link to end from head
-		} else {
-			// Queue has 1 element so create new chain
-			head->headPointer->next = item; // Add new link to new item
-			head->headPointer->prev = item; // Create chain linking to last element
-			item->next = head->headPointer; // Create chain linking to first element
-			item->prev = head->headPointer; // Add new link to old item
-		}
+	TCB_t* temp = head->headPointer;
+	if (temp == NULL) {
+		head->headPointer = item;	
+		head->headPointer->next = head->headPointer;
+		head->headPointer->prev = head->headPointer;
+	} else if (temp->next == temp) {		
+		temp->next = item;
+		temp->prev = item;
+		item->next = temp;
+		item->prev = temp;
 	} else {
-		head->headPointer = item; // Make header point to new item
-		item->prev = item; // Make pointer to NULL
-		item->next = item; // Make pointer to NULL
+		while (temp->next != head->headPointer)
+			temp = temp->next;
+		item->next = temp->next;
+		item->prev = temp;
+		temp->next = item;
+		head->headPointer->prev = item;
 	}
-	
-	return;
 }
 
 void rotQueue(struct queue *head) {
