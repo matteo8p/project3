@@ -18,7 +18,7 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-	TCB_t* temp = head->>headPointer;
+	TCB_t* temp = head->headPointer;
 	if (temp == NULL) {
 		head->headPointer = item;	
 		head->headPointer->next = head->headPointer;
