@@ -63,8 +63,9 @@ void producer(int id)
         V(full);
         i++; 
     }
-    // if(runQ->headPointer == NULL) exit(0); 
-    yield(); 
+    TCB_t *tcb = delQueue(runQ); 
+    if(runQ->headPointer == NULL) exit(0); 
+    swapcontext(&(tcb->context), &(runQ->headPointer->context)); 
 }
 
 void consumer(int id)
@@ -81,8 +82,9 @@ void consumer(int id)
         V(empty); 
         i++; 
     }
-    // if(runQ->headPointer == NULL) exit(0); 
-    yield(); 
+    TCB_t *tcb = delQueue(runQ); 
+    if(runQ->headPointer == NULL) exit(0); 
+    swapcontext(&(tcb->context), &(runQ->headPointer->context)); 
 }
 
 
