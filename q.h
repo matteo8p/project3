@@ -6,12 +6,6 @@ typedef struct queue {
 	struct TCB_t *headPointer; // Pointer to 1st Element in Queue
 } queue;
 
-void initQueue(struct queue*);	
-void addQueue(struct queue*, struct TCB_t*);	
-void rotateQ(struct queue*);	
-struct TCB_t* delQueue(struct queue*);	
-struct TCB_t* newItem();	
-
 void initQueue(struct queue *head) {
 	head->headPointer = NULL;
 }
