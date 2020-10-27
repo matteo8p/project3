@@ -48,10 +48,12 @@ struct TCB_t* delQueue(struct queue *head) {
 		head->headPointer = NULL; 
 	}else
 	{
-		struct TCB_t *last = head->headPointer->prev; 
-		struct TCB_t *second = head->headPointer->next; 
-		second->prev = last; 
-		last->next = second; 
+		while(deletedItem->next != head->headPointer)
+		{
+			deletedItem = deletedItem->next; 
+		}
+		deletedItem->prev->next = deletedItem->next; 
+		deletedItem->next->prev = deletedItem->prev; 
 	}
 	return deletedItem;
 }
