@@ -53,9 +53,6 @@ struct TCB_t* delQueue(struct queue *head) {
 		second->prev = last; 
 		last->next = second; 
 	}
-	
-	deletedItem->next = deletedItem; 
-	deletedItem->prev = deletedItem; 
 	return deletedItem;
 }
 
