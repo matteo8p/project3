@@ -40,7 +40,6 @@ void rotQueue(struct queue *head) {
 }
 
 struct TCB_t* delQueue(struct queue *head) {
-	if(head->headPointer == NULL) return NULL; 
 	struct TCB_t *deletedItem = head->headPointer; 
 
 	if(deletedItem->next == deletedItem)
