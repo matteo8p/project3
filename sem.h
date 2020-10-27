@@ -42,6 +42,7 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
+	if(runQ->headPointer == NULL) exit(0); 
 	if(sem->value == 0 && sem->semQ->headPointer != NULL)
 	{
 		addQueue(runQ, delQueue(sem->semQ));
