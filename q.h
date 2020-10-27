@@ -23,8 +23,8 @@ void addQueue(struct queue *head, struct TCB_t *item) {
    if(pointer == NULL)                                //If head is empty (NULL)   
    {
       head->headPointer = item;                                   //set head to item. Point to itself. 
-      head->headPointer->next = *head; 
-      head->headPointer->prev = *head;                       
+      head->headPointer->next = head->headPointer; 
+      head->headPointer->prev = head->headPointer;                       
    }else                                              //If head node exists 
    {
       pointer = head->headPointer->prev;                        //Pointer is the last element in queue 
@@ -42,7 +42,7 @@ void rotQueue(struct queue *head) {
 
 struct TCB_t* delQueue(struct queue *head) {
    TCB_t *delq = head->headPointer; 
-   if(head->headPointer == NULL || head->headPointer->next == *head)
+   if(head->headPointer == NULL || head->headPointer->next == head->headPointer)
    {
       head->headPointer = NULL; 
       return delq; 
