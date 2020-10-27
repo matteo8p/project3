@@ -19,7 +19,6 @@ void P(semaphore *sem, int id)
 {
 	while(1)
 	{
-		if(runQ->headPointer == NULL) exit(0); 
 		if(sem->value <= 0)
 		{
 			if(id > 0)
@@ -42,11 +41,11 @@ void P(semaphore *sem, int id)
 
 void V(semaphore *sem) 
 {
-	if(runQ->headPointer == NULL) exit(0); 
 	if(sem->value == 0 && sem->semQ->headPointer != NULL)
 	{
 		addQueue(runQ, delQueue(sem->semQ));
 	}
 	sem->value++;
+	printf("Yield V");
 	yield(); 
 }
