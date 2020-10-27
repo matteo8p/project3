@@ -18,7 +18,7 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-	TCB_t* temp = head->headPointer;
+	struct TCB_t* temp = head->headPointer;
 	if (temp == NULL) {
 		head->headPointer = item;	
 		head->headPointer->next = head->headPointer;
@@ -60,10 +60,5 @@ struct TCB_t* delQueue(struct queue *head) {
 
 struct TCB_t* newItem() {
 	struct TCB_t *item = (struct TCB_t*) malloc(sizeof(struct TCB_t));
-	
-	if (!item) {
-		item->prev = item;
-		item->next = item;
-	}
 	return item;
 }
