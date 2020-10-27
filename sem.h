@@ -19,7 +19,7 @@ void P(semaphore *sem, int id)
 {
 	while(1)
 	{
-		if(sem->value == 0)
+		if(sem->value <= 0)
 		{
 			if(id > 0)
 			{
