@@ -23,7 +23,7 @@ void P(semaphore *sem, int id)
 		{
 			if(id > 0)
 			{
-				printf("\n Producer %d is waiting \n", id); 
+				printf("\n Producer %d is waiting\n", id); 
 			}else
 			{
 				printf("\n Consumer %d is waiting \n", -id); 
