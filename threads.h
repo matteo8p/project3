@@ -24,8 +24,8 @@ void yield() {
 	ucontext_t context_b; 
 	getcontext(&context_a);
 	runQ->headPointer->context = context_a;
-	rotQueue(runQ->headPointer);
+	rotQueue(runQ);
 	context_b = runQ->headPointer->context;
-	swapcontext(&context_b, &context_a);
+	swapcontext(&context_a, &context_b);
 }
 
