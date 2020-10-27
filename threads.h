@@ -20,11 +20,8 @@ void run() {
 }
 
 void yield() {
-	ucontext_t from, to;
-	getcontext(&from);
-	runQ->headPointer->context = from;
-	rotQueue(runQ);
-	to = runQ->headPointer->context;
-	swapcontext(&from, &to);
+	TCB_t *temp = runQ->headPointer; 
+	rotateQ(temp); 
+	swapcontext(&(temp->context), &(runQ->headPointer->context)); 
 }
 
