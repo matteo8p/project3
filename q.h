@@ -38,9 +38,8 @@ void addQueue(struct queue *head, struct TCB_t *item) {
 	}
 }
 
-void rotQueue(struct TCB_t *head) {
-	TCB_t* deletedQ = delQueue(head); 
-	addQueue(head, deletedQ);
+void rotQueue(struct queue *head) {
+	addQueue(head, delQueue(head));
 	return;
 }
 
