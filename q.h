@@ -60,10 +60,5 @@ struct TCB_t* delQueue(struct queue *head) {
 
 struct TCB_t* newItem() {
 	struct TCB_t *item = (struct TCB_t*) malloc(sizeof(struct TCB_t));
-	
-	if (!item) {
-		item->prev = item;
-		item->next = item;
-	}
 	return item;
 }
