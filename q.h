@@ -17,21 +17,44 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-   TCB_t *pointer = head->headPointer; 
+//    TCB_t *pointer = head->headPointer; 
 
-   if(pointer == NULL)                                //If head is empty (NULL)   
-   {
-      head->headPointer = item;                                   //set head to item. Point to itself. 
-      head->headPointer->next = head->headPointer; 
-      head->headPointer->prev = head->headPointer;                       
-   }else                                              //If head node exists 
-   {
-      pointer = head->headPointer->prev;                        //Pointer is the last element in queue 
-      item->next = head->headPointer;  
-      item->prev = pointer; 
-      pointer->next = item; 
-      head->headPointer->prev = item;                     
-   }
+//    if(pointer == NULL)                                //If head is empty (NULL)   
+//    {
+//       head->headPointer = item;                                   //set head to item. Point to itself. 
+//       head->headPointer->next = head->headPointer; 
+//       head->headPointer->prev = head->headPointer;                       
+//    }else                                              //If head node exists 
+//    {
+//       pointer = head->headPointer->prev;                        //Pointer is the last element in queue 
+//       item->next = head->headPointer;  
+//       item->prev = pointer; 
+//       pointer->next = item; 
+//       head->headPointer->prev = item;                     
+//    }
+	// Check for 0 elements in Queue
+	if (head->headPointer != NULL) {
+		if (head->headPointer->next != NULL) {
+			// Queue is not empty, break chain and insert new item to end
+			item->prev = head->headPointer->prev; // Add new link at end of chain
+			item->next = head->headPointer; // Attach new link to beginning of chain
+			head->headPointer->prev->next = item; // Make link from last element
+			head->headPointer->prev = item; // Make link to end from head
+		} else {
+			// Queue has 1 element so create new chain
+			head->headPointer->next = item; // Add new link to new item
+			head->headPointer->prev = item; // Create chain linking to last element
+			item->next = head->headPointer; // Create chain linking to first element
+			item->prev = head->headPointer; // Add new link to old item
+		}
+	} else {
+		// Queue is empty
+		head->headPointer = item; // Make header point to new item
+		item->prev = NULL; // Make pointer to NULL
+		item->next = NULL; // Make pointer to NULL
+	}
+	
+	return;
 }
 
 void rotQueue(struct queue *head) {
@@ -39,19 +62,27 @@ void rotQueue(struct queue *head) {
 }
 
 struct TCB_t* delQueue(struct queue *head) {
-   TCB_t *delq = head->headPointer; 
-   if(head->headPointer == NULL || head->headPointer->next == head->headPointer)
-   {
-      head->headPointer = NULL; 
-      return delq; 
-   }else
-   {
-      TCB_t* lastNode = head->headPointer->prev; 
-      head->headPointer= head->headPointer->next; 
-      lastNode->next = head->headPointer; 
-      head->headPointer->prev = lastNode; 
-   }
-   return delq; 
+	// Grab the first element in the Queue
+	struct TCB_t *item = head->headPointer;
+
+	// Check for empty Queue
+	if (head->headPointer != NULL) {
+		// Check for single or multiple elements in Queue
+		if (head->headPointer->next != NULL) {
+			// Grab the last element and next element
+			// Assign next and prev to recreate chain
+			head->headPointer->prev->next = head->headPointer->next;
+			head->headPointer->next->prev = head->headPointer->prev;
+
+			// Set the Queue header to next
+			head->headPointer = head->headPointer->next;
+		} else {
+			// Remove single element from Queue
+			head->headPointer = NULL;
+		}
+	}
+	
+	return item;
 }
 
 struct TCB_t* newItem() {
