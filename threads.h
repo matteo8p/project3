@@ -29,7 +29,7 @@ void yield() {
 	// swapcontext(&context_a, &context_b);
 
 	TCB_t *temp = runQ->headPointer; 
-	rotateQ(runQ);
+	rotQueue(runQ);
 	swapcontext(&(temp->context), &(runQ->headPointer->context));
 }
 
