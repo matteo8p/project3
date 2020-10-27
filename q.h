@@ -18,19 +18,21 @@ void initQueue(struct queue *head) {
 }
 
 void addQueue(struct queue *head, struct TCB_t *item) {
-	if(head->headPointer == NULL)
-	{
-		head->headPointer = item; 
-		head->headPointer->next = head->headPointer; 
-		head->headPointer->prev = head->headPointer; 
-	}else
-	{
-		struct TCB_t* lastItem = head->headPointer->prev; 
-		lastItem->next = item; 
-		item->prev = lastItem; 
-		item->next = head->headPointer; 
-		head->headPointer->prev = item; 
-	}	
+   TCB_t *pointer = head->headPointer; 
+
+   if(pointer == NULL)                                //If head is empty (NULL)   
+   {
+      head->headPointer = item;                                   //set head to item. Point to itself. 
+      head->headPointer->next = *head; 
+      head->headPointer->prev = *head;                       
+   }else                                              //If head node exists 
+   {
+      pointer = head->headPointer->prev;                        //Pointer is the last element in queue 
+      item->next = head->headPointer;  
+      item->prev = pointer; 
+      pointer->next = item; 
+      head->headPointer->prev = item;                     
+   }
 }
 
 void rotQueue(struct queue *head) {
@@ -39,17 +41,19 @@ void rotQueue(struct queue *head) {
 }
 
 struct TCB_t* delQueue(struct queue *head) {
-	struct TCB_t *item = head->headPointer;
-	if (head->headPointer != NULL) {
-		TCB_t *lastNode = head->headPointer->prev; 
-		head->headPointer = head->headPointer->next; 
-		head->headPointer->prev = lastNode; 
-		lastNode->prev = head->headPointer; 
-	}else
-	{
-		head->headPointer = NULL; 
-	}
-	return item;
+   TCB_t *delq = head->headPointer; 
+   if(head->headPointer == NULL || head->headPointer->next == *head)
+   {
+      head->headPointer = NULL; 
+      return delq; 
+   }else
+   {
+      TCB_t* lastNode = head->headPointer->prev; 
+      head->headPointer= head->headPointer->next; 
+      lastNode->next = head->headPointer; 
+      head->headPointer->prev = lastNode; 
+   }
+   return delq; 
 }
 
 struct TCB_t* newItem() {
